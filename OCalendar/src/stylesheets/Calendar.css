@@ -1,0 +1,150 @@
+:root {
+    /* Generic colors */
+    --OrangeCompany_BrandOrange: #F37923;     /* RGB Code: 243 121 35  */
+    --OrangeCompany_Orange: #FE7743;          /* RGB Code: 254 119 67  */
+    --OrangeCompany_LightOrange: #FEA07B;     /* RGB Code: 254 160 123 */
+    --OrangeCompany_DarkOrange: #D35E0C;      /* RGB Code: 211 94  12  */
+
+    /* Light mode colors */
+    --OrangeCompany_OffWhite: #EFEEEA;        /* RGB Code: 239 238 234 */
+    --OrangeCompany_CardWhite: #FBFBFA;       /* RGB Code: 251 251 250 */
+    --OrangeCompany_GreyBox_LightMode: #8f8f8f;
+
+    /* Dark mode colors */
+    --OrangeCompany_OffBlack: #1C1C1C;        /* RGB Code:  28  28  28 */
+    --OrangeCompany_CardBlack: #353535;       /* RGB Code:  53  53  53 */
+
+    /*Colours can be called with: var([COLOUR NAME])*/
+}
+
+/* My wrapper box */
+#white-box {
+    position: fixed;
+    width: 65vw;
+    height: 65vh;
+    top: 6vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--OrangeCompany_CardWhite);
+    color: var(--OrangeCompany_OffBlack);
+    border-radius: 25px;
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+/* Inside the white box (left box)*/
+#white-box-inside {
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 25px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.12);
+    padding: 24px;
+    gap: 12px;
+    flex: 2;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Event list (right box) */
+#event-list {
+    flex: 1;
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Individual event items in right box */
+#event-item {
+    background: var(--OrangeCompany_LightOrange);
+    color: #ffffff;
+    border-radius: 9999px; /* I was lazy */
+    padding: 12px 24px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#event-item:hover,
+#event-item:focus {
+    background: var(--OrangeCompany_Orange);
+}
+
+#calendar {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+#calendar-item {
+    background: var(--OrangeCompany_LightOrange);
+    color: #ffffff;
+    border-radius: 9999px; /* I was lazy */
+    padding: 4px 2px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#calendar-item .past {
+    background: gray;
+}
+
+#calendar-item .going {
+    background: green;
+}
+
+#calendar-item .notGoing {
+    background: red;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--OrangeCompany_OffBlack);
+    }
+
+    .menu-bar {
+        background-color: var(--OrangeCompany_CardBlack);
+        box-shadow: 0 10px 20px rgb(243, 121, 35);
+    }
+
+    .menu-bar a {
+        background: var(--OrangeCompany_BrandOrange);
+    }
+
+    .menu-bar a:hover {
+        background: var(--OrangeCompany_DarkOrange);
+        outline: none;
+    }
+    .menu-bar a:focus {
+        background: var(--OrangeCompany_DarkOrange);
+        outline: none;
+    }
+
+    /* 'active' class for the current page's button */
+    .menu-bar a.active {
+        background: var(--OrangeCompany_DarkOrange);
+    }
+
+    .event-item {
+        background-color: var(--OrangeCompany_BrandOrange);
+    }
+
+    .event-item:hover,
+    .event-item:focus {
+        background: var(--OrangeCompany_DarkOrange);
+    }
+
+    .white-box {
+        box-shadow: 0 10px 20px rgb(243, 121, 35);
+    }
+
+    .white-box, .white-box-inside, .event-list, .attending-list, .Book-a-room-list {
+        background: var(--OrangeCompany_CardBlack);
+        color: var(--OrangeCompany_OffWhite);
+    }
+}
