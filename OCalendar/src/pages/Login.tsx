@@ -1,5 +1,5 @@
-import OrangeLogo from './assets/Orange.png'
-import './stylesheets/Login.css'
+import OrangeLogo from '../assets/Orange.png'
+import '../stylesheets/Login.css'
 
 function Login() {
     return (

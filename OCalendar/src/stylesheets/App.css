@@ -20,42 +20,7 @@
     /* Dark mode colors */
     --OrangeCompany_OffBlack: #1C1C1C;        /* RGB Code:  28  28  28 */
     --OrangeCompany_CardBlack: #353535;       /* RGB Code:  53  53  53 */
+    --OrangeCompany_CardBlack_Box: #4c4c4c;   /* RGB Code:  76  76  76 */
 
     /*Colours can be called with: var([COLOUR NAME])*/
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

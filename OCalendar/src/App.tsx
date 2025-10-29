@@ -1,33 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Route, Routes } from 'react-router-dom'
 import './stylesheets/App.css'
+import Home from './pages/Home.tsx'
+import Login from './pages/Login.tsx'
+import Navbar from './components/Navbar.tsx'
+import NavbarLoggedIn from './components/NavbarLoggedIn.tsx'
+import Calendar from './pages/Calendar.tsx'
+import Attending from './pages/Attending.tsx'
+import BookaRoom from './pages/BookaRoom.tsx'
+import NewRoom from './pages/NewRoom.tsx'
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const isLoggedIn = true; // nog authentication logic hier
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/attending" element={<Attending />} />
+
+        <Route path="/book-a-room" element={<BookaRoom />}>
+          <Route path="new-room" element={<NewRoom />} />
+          <Route path="new-room" element={<NewRoom />} />
+        </Route>
+      </Routes>
+      { isLoggedIn ? <NavbarLoggedIn /> : <Navbar /> }
     </>
   )
 }

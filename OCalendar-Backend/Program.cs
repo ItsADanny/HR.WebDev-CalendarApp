@@ -14,15 +14,21 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/Login", () =>
+app.MapPost("/Register", (HttpRequest request) =>
 {
-    return "Balls";
+    return CAccount.Register(request);
 })
-.WithName("GetLogin");
+.WithName("PostRegister");
+
+app.MapPost("/Login", (HttpRequest request) =>
+{
+    return CAccount.Auth();
+})
+.WithName("PostLogin");
 
 app.MapGet("/Logout", () =>
 {
-    return "Nigger";
+    return "Logout";
 })
 .WithName("GetLogout");
 
@@ -30,7 +36,7 @@ app.MapGet("", async () =>
 {
     return CEvent.GetEvent();
 })
-.WithName(GetEvents);
+.WithName("GetEvent");
 
 app.MapGet("/Event/{eventID}", async (int eventID) =>
 {

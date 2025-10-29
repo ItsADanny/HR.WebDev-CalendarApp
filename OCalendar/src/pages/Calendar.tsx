@@ -1,9 +1,9 @@
-import './stylesheets/Calendar.css'
+import '../stylesheets/Calendar.css'
 
 function Calendar() {
     return (
-        <div className="white-box">
-            <div className="white-box-inside">
+        <div className="Calendar__white-box">
+            <div className="Calendar__white-box-inside">
                 <table className="calendar">
                     <tr className="calendar-header">
                         <th>SUN</th>
@@ -69,12 +69,12 @@ function Calendar() {
                     </tr>
                 </table>
             </div>
-            <div className="event-list">
+            <div className="Calendar__event-list">
                 <h3>Events - September</h3>
-                <div className="event-title-underline"></div>
-                <div className="event-item">Event 1</div>
-                <div className="event-item">Event 2</div>
-                <div className="event-item">Event 3</div>
+                <div className="Calendar__event-title-underline"></div>
+                <div className="Calendar__event-item">Event 1</div>
+                <div className="Calendar__event-item">Event 2</div>
+                <div className="Calendar__event-item">Event 3</div>
             </div>
         </div>
     )

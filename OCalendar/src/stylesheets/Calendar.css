@@ -18,7 +18,7 @@
 }
 
 /* My wrapper box */
-#white-box {
+.Calendar__white-box {
     position: fixed;
     width: 65vw;
     height: 65vh;
@@ -35,7 +35,7 @@
 }
 
 /* Inside the white box (left box)*/
-#white-box-inside {
+.Calendar__white-box-inside {
     background: var(--OrangeCompany_CardWhite);
     border-radius: 25px;
     box-shadow: 4px 4px 4px rgba(0,0,0,0.12);
@@ -49,7 +49,7 @@
 }
 
 /* Event list (right box) */
-#event-list {
+.Calendar__event-list {
     flex: 1;
     background: var(--OrangeCompany_CardWhite);
     border-radius: 20px;
@@ -60,7 +60,7 @@
 }
 
 /* Individual event items in right box */
-#event-item {
+.Calendar__event-item {
     background: var(--OrangeCompany_LightOrange);
     color: #ffffff;
     border-radius: 9999px; /* I was lazy */
@@ -69,19 +69,29 @@
     text-align: center;
 }
 
-#event-item:hover,
-#event-item:focus {
+.Calendar__event-item:hover,
+.Calendar__event-item:focus {
     background: var(--OrangeCompany_Orange);
 }
 
-#calendar {
+.Calendar__event-title-underline,
+.Calendar__title-underline {
+    width: 100%;
+    height: 2px;
+    background: #111;
+    /* border-radius: 1px; */ /* rounded edges */
+    margin-bottom: 6px; /* Space under the underline */
+}
+
+/* the actual calendar */
+.calendar {
     width: 100%;
     height: 100%;
     align-items: center;
     text-align: center;
 }
 
-#calendar-item {
+.calendar-item {
     background: var(--OrangeCompany_LightOrange);
     color: #ffffff;
     border-radius: 9999px; /* I was lazy */
@@ -90,15 +100,15 @@
     text-align: center;
 }
 
-#calendar-item .past {
+.calendar-item .past {
     background: gray;
 }
 
-#calendar-item .going {
+.calendar-item .going {
     background: green;
 }
 
-#calendar-item .notGoing {
+.calendar-item .notGoing {
     background: red;
 }
 
