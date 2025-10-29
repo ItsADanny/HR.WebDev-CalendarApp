@@ -120,3 +120,35 @@
     min-height: 0;
     overflow-y: auto;
 }
+
+@media (prefers-color-scheme: dark) {
+    .Attending__white-box {
+        background: var(--OrangeCompany_CardBlack);
+        color: var(--OrangeCompany_OffWhite);
+        box-shadow: 4px 4px 5px rgba(243, 121, 35, 0.75);
+    }
+
+    /* Inside the white box (left box)*/
+    .Attending__white-box-inside {
+        background: var(--OrangeCompany_CardBlack);
+        box-shadow: 4px 4px 5px rgba(243, 121, 35, 0.75);
+    }
+
+    /* Event list (right box) */
+    .Attending__event-list {
+        background: var(--OrangeCompany_CardBlack);
+    }
+
+    .Attending__event-title-underline,
+    .Attending__title-underline {
+        background: var(--OrangeCompany_OffWhite);
+    }
+
+    .Attending__grey-top {
+        background: var(--OrangeCompany_CardBlack_Box);
+    }
+
+    .Attending__grey-bottom {
+        background: var(--OrangeCompany_CardBlack_Box);
+    }
+}

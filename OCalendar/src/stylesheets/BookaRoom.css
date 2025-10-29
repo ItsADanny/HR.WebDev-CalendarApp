@@ -146,6 +146,10 @@
         box-shadow: 4px 4px 5px rgba(243, 121, 35, 0.75);
     }
 
+    .BookaRoom__inner-container-vertical {
+        color: var(--OrangeCompany_OffWhite);
+    }
+
     .BookaRoom__event-title-underline,
     .BookaRoom__title-underline {
         background: var(--OrangeCompany_OffWhite);
@@ -162,6 +166,7 @@
     /* Event list (right box) */
     .BookaRoom__event-list {
         background: var(--OrangeCompany_CardBlack);
+        color: var(--OrangeCompany_OffWhite);
     }
 
     /* Individual event items in right box */
@@ -175,8 +180,15 @@
         background: var(--OrangeCompany_Orange);
     }
 
+    .BookaRoom__nav {
+        background: var(--OrangeCompany_CardBlack);
+    }
 
     .BookaRoom__nav-link {
         background: var(--OrangeCompany_LightOrange);
-}
+    }
+
+    .BookaRoom__event-title {
+        color: var(--OrangeCompany_OffWhite);
+    }
 }

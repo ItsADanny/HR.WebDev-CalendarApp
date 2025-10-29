@@ -14,7 +14,7 @@
     /* Dark mode colors */
     --OrangeCompany_OffBlack: #1C1C1C;        /* RGB Code:  28  28  28 */
     --OrangeCompany_CardBlack: #353535;       /* RGB Code:  53  53  53 */
-
+    --OrangeCompany_CardBlack_Box: #4c4c4c;
     /*Colours can be called with: var([COLOUR NAME])*/
 }
 
@@ -66,4 +66,11 @@ nav {
     color: #222;
     font-weight: 500;
     box-shadow: 0 4px 24px rgba(255,183,77,0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+    nav {
+        background: var(--OrangeCompany_CardBlack);
+        box-shadow: 4px 4px 5px rgba(243, 121, 35, 0.75);
+    }
 }

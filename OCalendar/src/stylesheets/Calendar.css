@@ -149,12 +149,17 @@
         background: var(--OrangeCompany_DarkOrange);
     }
 
-    .white-box {
+    .Calendar__white-box {
         box-shadow: 0 10px 20px rgb(243, 121, 35);
     }
 
-    .white-box, .white-box-inside, .event-list, .attending-list, .Book-a-room-list {
+    .Calendar__white-box, .Calendar__white-box-inside, .Calendar__event-list, .attending-list, .Book-a-room-list {
         background: var(--OrangeCompany_CardBlack);
         color: var(--OrangeCompany_OffWhite);
+    }
+
+    .Calendar__event-title-underline,
+    .Calendar__title-underline {
+        background: var(--OrangeCompany_OffWhite);
     }
 }
