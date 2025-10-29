@@ -1,9 +1,21 @@
-function RoomDetails({ booking }) {
+import '../stylesheets/RoomDetails.css';
+
+function RoomDetails({ booking }: { booking: any }) {
     return (
         <div className="RoomDetails__container">
-            <h2 className="RoomDetails__title">Room Details</h2>
             <p className="RoomDetails__info"><strong>Room Name:</strong> {booking.roomName}</p>
-            <p className="RoomDetails__info"><strong>Date:</strong> {booking.date}</p>
+            <div className="RoomDetails__underline"></div>
+
+            <div className="RoomDetails__infocard">
+                <p><strong>Room number:</strong> {booking.roomNumber}</p>
+                <p><strong>Location:</strong> {booking.location}</p>
+                <p><strong>Timeslot:</strong> {booking.timeSlot}</p>
+            </div>
+
+            <div className="RoomDetails__commentcard">
+                <p><strong>Comments:</strong></p>
+                <p>{booking.comments}</p>
+            </div>
         </div>
     );
 }

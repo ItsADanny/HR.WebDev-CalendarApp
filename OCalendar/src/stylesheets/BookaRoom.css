@@ -1,33 +1,4 @@
-/* My wrapper box
-.BookaRoom__white-box {
-    position: fixed;
-    width: 65vw;
-    height: 65vh;
-    top: 6vh;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--OrangeCompany_CardWhite);
-    color: var(--OrangeCompany_OffBlack);
-    border-radius: 25px;
-    box-shadow: 4px 4px 5px rgba(0,0,0,0.12);
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-}
-
-/* Inside the white box (left box)
-.BookaRoom__white-box-inside {
-    background: var(--OrangeCompany_CardWhite);
-    border-radius: 25px;
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.12);
-    padding: 24px;
-    gap: 12px;
-    flex: 2;
-    width: 100%;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-}
+/*
 
 .BookaRoom__event-title-underline,
 .BookaRoom__title-underline {
@@ -213,4 +184,17 @@
     display: flex;
     flex-direction: row;
     gap: 16px;
+}
+
+.BookaRoom__left-box {
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 25px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.12);
+    padding: 24px;
+    gap: 12px;
+    flex: 2;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
 }

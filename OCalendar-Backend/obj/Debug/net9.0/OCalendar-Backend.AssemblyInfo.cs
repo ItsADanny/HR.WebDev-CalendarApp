@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OCalendar-Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79e02a72a7444c37ae03eebe207d2df224954ac3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c4c35dd642c9c7a6c128f074aa4ea027437fbec")]
 [assembly: System.Reflection.AssemblyProductAttribute("OCalendar-Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OCalendar-Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
