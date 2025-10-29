@@ -151,4 +151,13 @@
     .Attending__grey-bottom {
         background: var(--OrangeCompany_CardBlack_Box);
     }
+
+    .Attending__event-item {
+        background: var(--OrangeCompany_BrandOrange);
+    }
+
+    .Attending__event-item:hover,
+    .Attending__event-item:focus {
+        background: var(--OrangeCompany_DarkOrange);
+    }
 }

@@ -162,4 +162,13 @@
     .Calendar__title-underline {
         background: var(--OrangeCompany_OffWhite);
     }
+
+    .Calendar__event-item {
+        background: var(--OrangeCompany_BrandOrange);
+    }
+
+    .Calendar__event-item:hover,
+    .Calendar__event-item:focus {
+        background: var(--OrangeCompany_DarkOrange);
+    }
 }

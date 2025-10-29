@@ -73,4 +73,19 @@ nav {
         background: var(--OrangeCompany_CardBlack);
         box-shadow: 4px 4px 5px rgba(243, 121, 35, 0.75);
     }
+
+    .nav-link {
+        background: var(--OrangeCompany_BrandOrange);
+        color: var(--OrangeCompany_OffWhite);
+    }
+
+    .nav-link.active {
+        background: var(--OrangeCompany_DarkOrange);
+        color: var(--OrangeCompany_CardWhite);
+    }
+
+    .nav-link:hover {
+        background-color: var(--OrangeCompany_Orange);
+        color: var(--OrangeCompany_CardWhite);
+    }
 }

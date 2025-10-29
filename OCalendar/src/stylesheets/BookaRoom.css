@@ -171,13 +171,13 @@
 
     /* Individual event items in right box */
     .BookaRoom__event-item {
-        background: var(--OrangeCompany_LightOrange);
+        background: var(--OrangeCompany_BrandOrange);
         color: #ffffff;
     }
 
     .BookaRoom__event-item:hover,
     .BookaRoom__event-item:focus {
-        background: var(--OrangeCompany_Orange);
+        background: var(--OrangeCompany_DarkOrange);
     }
 
     .BookaRoom__nav {
@@ -185,7 +185,13 @@
     }
 
     .BookaRoom__nav-link {
-        background: var(--OrangeCompany_LightOrange);
+        background: var(--OrangeCompany_BrandOrange);
+        color: var(--OrangeCompany_OffWhite);
+    }
+
+    .BookaRoom__nav-link:hover {
+        background: var(--OrangeCompany_DarkOrange);
+        color: var(--OrangeCompany_OffWhite);
     }
 
     .BookaRoom__event-title {
