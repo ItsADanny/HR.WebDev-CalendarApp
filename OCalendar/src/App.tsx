@@ -8,6 +8,7 @@ import Calendar from './pages/Calendar.tsx'
 import Attending from './pages/Attending.tsx'
 import BookaRoom from './pages/BookaRoom.tsx'
 import NewRoom from './pages/NewRoom.tsx'
+import UpdateRoom from './pages/UpdateRoom.tsx'
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
 
         <Route path="/book-a-room" element={<BookaRoom />}>
           <Route path="new-room" element={<NewRoom />} />
-          <Route path="new-room" element={<NewRoom />} />
+          <Route path="update-booking" element={<UpdateRoom />} />
         </Route>
       </Routes>
       { isLoggedIn ? <NavbarLoggedIn /> : <Navbar /> }

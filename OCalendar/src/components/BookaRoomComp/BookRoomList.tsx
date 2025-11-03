@@ -4,6 +4,7 @@ function BookRoomList({ bookedRooms } : { bookedRooms: any[] }) {
             {bookedRooms.map((booking: any, index: number) => (
                 <div key={index} className="BookRoomList__item">
                     <p>
+                        {booking.id} 
                         Room: {booking.roomName}
                         {/* Booked By: {booking.bookedBy}
                         Date: {booking.date} */}

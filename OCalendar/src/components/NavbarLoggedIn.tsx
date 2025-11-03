@@ -4,7 +4,7 @@ import '../stylesheets/Navbar.css';
 function Navbar() {
     return (
         <>
-            <nav>
+            <nav className="navbar">
                 <NavLink to="/calendar" className="nav-link">Calendar</NavLink>
                 <NavLink to="/attending" className="nav-link">Attending</NavLink>
                 <NavLink to="/book-a-room" className="nav-link">Book a Room</NavLink>
