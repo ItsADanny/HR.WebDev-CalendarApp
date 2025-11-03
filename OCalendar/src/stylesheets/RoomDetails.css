@@ -1,3 +1,10 @@
+.RoomDetails {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
 .RoomDetails__info { 
     color: #ff2525;
 }
@@ -10,18 +17,26 @@
     margin-bottom: 6px;  /* Space under the underline */
 }
 
+.RoomDetails__cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
 .RoomDetails__infocard {
-    flex: 6;
+    flex: 3;
     background: var(--OrangeCompany_GreyBox_LightMode);
     border-radius: 25px;
     padding: 24px;
     box-shadow: 2px 2px 6px rgba(0,0,0,0.08);
     min-height: 0;
-    margin-bottom: 20px;
 }
 
 .RoomDetails__commentcard {
-    flex: 4;
+    flex: 2;
     background: var(--OrangeCompany_GreyBox_LightMode);
     border-radius: 25px;
     padding: 24px;

@@ -192,9 +192,19 @@
     box-shadow: 4px 4px 4px rgba(0,0,0,0.12);
     padding: 24px;
     gap: 12px;
-    flex: 2;
+    flex: 5;
     width: 100%;
     min-width: 0;
     display: flex;
     flex-direction: column;
+}
+
+.BookaRoom__right-box {
+    flex: 2;
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
