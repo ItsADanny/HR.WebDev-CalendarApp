@@ -21,10 +21,9 @@ function App() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/attending" element={<Attending />} />
 
-        <Route path="/book-a-room" element={<BookaRoom />}>
-          <Route path="new-room" element={<NewRoom />} />
-          <Route path="update-booking" element={<UpdateRoom />} />
-        </Route>
+        <Route path="/book-a-room" element={<BookaRoom />} />
+        <Route path="/book-a-room/new-room" element={<NewRoom />} />
+        <Route path="/book-a-room/update-booking" element={<UpdateRoom />} />
       </Routes>
       { isLoggedIn ? <NavbarLoggedIn /> : <Navbar /> }
     </>

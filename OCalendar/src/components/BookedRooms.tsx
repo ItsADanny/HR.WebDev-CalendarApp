@@ -25,7 +25,6 @@ function BookedRooms() {
                 <NavLink to="new-room" className="BookedRooms__nav-link">Book New Room</NavLink>
                 <NavLink to="update-booking" className="BookedRooms__nav-link">Update Booking</NavLink>
             </nav>
-            <Outlet />
         </div>
     );
 }
