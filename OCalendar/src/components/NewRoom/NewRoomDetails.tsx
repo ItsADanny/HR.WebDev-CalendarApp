@@ -1,6 +1,6 @@
-import '../stylesheets/RoomDetails.css';
+import BookInfoCard from "../BookaRoomComp/BookInfoCard";
 
-function RoomDetails({ booking }: { booking: any }) {
+function NewRoomDetails({ booking }: { booking: any }) {
     return (
         <div className="RoomDetails">
             <div className="RoomDetails__titleContainer">
@@ -12,10 +12,10 @@ function RoomDetails({ booking }: { booking: any }) {
             </div>
             
             <div className="RoomDetails__cards-container">
-                
+                {/* <BookInfoCard booking={booking}/> reuse this css */}
             </div>
         </div>
     );
 }
 
-export default RoomDetails;
+export default NewRoomDetails;

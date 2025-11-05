@@ -1,4 +1,5 @@
-import RoomDetails from "../components/RoomDetails";
+import NewRoomDetails from "../components/NewRoom/NewRoomDetails";
+
 
 function NewRoom() {
     const selectedBooking = {
@@ -11,7 +12,7 @@ function NewRoom() {
 
         <div className="BookaRoom__container">
             <div className="BookaRoom__left-box">
-                <RoomDetails booking={selectedBooking} />
+                <NewRoomDetails booking={selectedBooking} />
             </div>
 
             <div className="BookaRoom__right-box">
