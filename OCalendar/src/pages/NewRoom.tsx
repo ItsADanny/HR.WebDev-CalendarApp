@@ -1,3 +1,4 @@
+import BookedRooms from "../components/BookedRooms";
 import NewRoomDetails from "../components/NewRoom/NewRoomDetails";
 
 
@@ -16,7 +17,7 @@ function NewRoom() {
             </div>
 
             <div className="BookaRoom__right-box">
-                Hoi
+                Hello newRoom
             </div>
         </div>
     )

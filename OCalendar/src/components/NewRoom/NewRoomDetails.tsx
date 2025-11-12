@@ -1,4 +1,4 @@
-import BookInfoCard from "../BookaRoomComp/BookInfoCard";
+import NewRoomInfoCard from "./NewRoomInfoCard";
 
 function NewRoomDetails({ booking }: { booking: any }) {
     return (
@@ -13,6 +13,7 @@ function NewRoomDetails({ booking }: { booking: any }) {
             
             <div className="RoomDetails__cards-container">
                 {/* <BookInfoCard booking={booking}/> reuse this css */}
+                <NewRoomInfoCard booking={booking}/>
             </div>
         </div>
     );
