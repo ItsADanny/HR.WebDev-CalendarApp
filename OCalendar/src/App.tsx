@@ -12,7 +12,7 @@ import UpdateRoom from './pages/UpdateRoom.tsx'
 
 
 function App() {
-  const isLoggedIn = true; // nog authentication logic hier
+  const isLoggedIn = false; // nog authentication logic hier
   return (
     <>
       <Routes>
