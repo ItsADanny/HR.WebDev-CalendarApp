@@ -1,12 +1,10 @@
 import { NavLink } from "react-router-dom";
 import '../stylesheets/BookaRoom.css';
 import HeaderCard from "../components/Bookingcomponents/HeaderCard.tsx";
-import RoomInfoCard from "../components/Bookingcomponents/RoomInfoCard.tsx";
-import RoomCommentCard from "../components/Bookingcomponents/RoomCommentCard.tsx";
-import BookedRooms from "../components/Bookingcomponents/BookedRooms.tsx";
+import NewRoomCard from "../components/NewBookingcomp/NewRoomCard.tsx";
 import { useState } from "react";
 
-function BookaRoom() {
+function BookaNewRoom() {
     const [rooms] = useState([
         {
         id: 1,
@@ -44,28 +42,18 @@ function BookaRoom() {
         <div className="booking-container">
             {/* LEFT COLUMN */}
             <div className="left-column">
-                <HeaderCard 
-                    title={selectedRoom && selectedRoom.roomNumber != null ? `Room ${selectedRoom.roomNumber}` : 'Select a Room'}
-                    status={selectedRoom ? "Booked" : "Available"}
-                />
+                <HeaderCard title="New Room" status="Available"/>
                 <div className="cards-container">
-                    <RoomInfoCard 
-                        roomNumber={selectedRoom?.roomNumber.toString()}
-                        location={selectedRoom?.location}
-                        timeslot={selectedRoom?.timeSlot}
-                    />
-                    <RoomCommentCard comments="" onChange={() => {}} />
+                    <NewRoomCard />
                 </div>
             </div>
             {/* RIGHT COLUMN */}
             <div className="right-column">
-                <p>Booked Rooms</p>
-                <BookedRooms rooms={rooms} onSelect={setSelectedRoom} />
                 
                 <div className="buttons-container">
-                    <button className="cancel-booking-button" onClick={() => alert('Booking Cancelled!')}>Cancel Booking</button>
-                    <NavLink to="/book-new-room" className="book-new-room-link">Book a new Room</NavLink>
-                    <NavLink to="/update-room" className="update-room-link">Update Room</NavLink>
+                    <button className="confirm-booking-button" onClick={() => alert('Booking Confirmed!')}>Confirm Booking</button>
+                    <NavLink to="/book-a-room">Back to Book a Room</NavLink>
+                    
                 </div>
             </div>
         </div>
@@ -73,4 +61,4 @@ function BookaRoom() {
   );
 }
 
-export default BookaRoom;
+export default BookaNewRoom;

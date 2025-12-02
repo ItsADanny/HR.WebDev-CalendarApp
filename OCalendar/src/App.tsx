@@ -8,6 +8,7 @@ import Attending from './pages/Attending.tsx'
 import BookaRoom from './pages/BookaRoom.tsx'
 import UpdateRoom from './pages/UpdateRoom.tsx'
 import Register from './pages/Register.tsx'
+import BookaNewRoom from './pages/BookaNewRoom.tsx'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/attending" element={<Attending />} />
 
         <Route path="/book-a-room" element={<BookaRoom />} />
+        <Route path="/book-new-room" element={<BookaNewRoom />} />
       </Routes>
       { isLoggedIn ? <NavbarLoggedIn /> : null }
     </>
