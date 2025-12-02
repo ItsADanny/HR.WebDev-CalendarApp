@@ -1,4 +1,4 @@
-.BookaRoom__container {
+.booking-container {
     position: fixed;
     width: 65vw;
     height: 65vh;
@@ -14,25 +14,66 @@
     gap: 16px;
 }
 
-.BookaRoom__left-box {
-    background: var(--OrangeCompany_CardWhite);
-    border-radius: 25px;
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.12);
-    padding: 24px;
-    gap: 12px;
-    flex: 5;
-    width: 100%;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
+/* columns */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  flex: 7;
+  border-radius: 25px;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.12);
+  gap: 12px;
+  background-color: antiquewhite;
+  overflow-y: auto;
+  min-height: 20vh;
 }
 
-.BookaRoom__right-box {
-    flex: 2;
-    background: var(--OrangeCompany_CardWhite);
-    border-radius: 20px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.right-column {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 15px;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  flex: 1;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  margin-top: auto;
+}
+
+.cancel-booking-button {
+  background-color: #ff4d4d;
+  width: 100%;
+  padding: 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.cancel-booking-button:hover {
+  background-color: #e60000;
+  font-weight: bold;
+}
+
+.book-new-room-link, .update-room-link {
+    width: 100%;
+    padding: 15px 10px;
+    background: var(--OrangeCompany_LightOrange);
+    border-radius: 9999px;
+    cursor: pointer;
+}
+
+.book-new-room-link:hover, .update-room-link:hover {
+    background: var(--OrangeCompany_Orange);
 }

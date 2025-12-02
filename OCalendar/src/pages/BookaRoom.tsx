@@ -1,24 +1,35 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import '../stylesheets/BookaRoom.css';
-import RoomDetails from "../components/RoomDetails";
-import BookedRooms from "../components/BookedRooms";
+import HeaderCard from "../components/Bookingcomponents/HeaderCard.tsx";
+import RoomInfoCard from "../components/Bookingcomponents/RoomInfoCard.tsx";
+import RoomCommentCard from "../components/Bookingcomponents/RoomCommentCard.tsx";
 
 function BookaRoom() {
-    const selectedBooking = {
-        roomName: "Room A",
-        date: "2024-07-15",
-    };
-
     return (
-        <div className="BookaRoom__container">
-            <div className="BookaRoom__left-box">
-                <RoomDetails booking={selectedBooking}/>
+    <>
+        <NavLink to="/">Go Back Home</NavLink>
+        <div className="booking-container">
+            {/* LEFT COLUMN */}
+            <div className="left-column">
+                <HeaderCard />
+                <div className="cards-container">
+                    <RoomInfoCard />
+                    <RoomCommentCard comments="" onChange={() => {}} />
+                </div>
             </div>
-
-            <div className="BookaRoom__right-box">
-                <BookedRooms />
+            {/* RIGHT COLUMN */}
+            <div className="right-column">
+                <p>Booked Rooms!</p>
+                {/* hier moeten de booked rooms komen */}
+                <div className="buttons-container">
+                    <button className="cancel-booking-button" onClick={() => alert('Booking Cancelled!')}>Cancel Booking</button>
+                    <NavLink to="/book-new-room" className="book-new-room-link">Book a new Room</NavLink>
+                    <NavLink to="/update-room" className="update-room-link">Update Room</NavLink>
+                </div>
             </div>
         </div>
-    );
+    </>
+  );
 }
+
 export default BookaRoom;

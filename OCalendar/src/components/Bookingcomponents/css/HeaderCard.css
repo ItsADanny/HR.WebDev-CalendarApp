@@ -1,0 +1,19 @@
+.header-card {
+    display: flex;
+    /* background-color: #f5f5f5; */
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.status-indicator {
+    background: orange; /* NEEDS TO BE SWITCHED ON AND OFF IF YOU BOOK? */
+    color: black;
+    align-self: center;
+    border-radius: 9999px;
+    padding: 15px 75px; /* Puffing the button */
+    margin-left: auto;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
