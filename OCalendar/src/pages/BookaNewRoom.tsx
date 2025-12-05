@@ -49,6 +49,7 @@ function BookaNewRoom() {
             </div>
             {/* RIGHT COLUMN */}
             <div className="right-column">
+                <p>Booked Rooms</p>
                 
                 <div className="buttons-container">
                     <button className="confirm-booking-button" onClick={() => alert('Booking Confirmed!')}>Confirm Booking</button>
