@@ -25,6 +25,7 @@ function App() {
 
         <Route path="/book-a-room" element={<BookaRoom />} />
         <Route path="/book-new-room" element={<BookaNewRoom />} />
+        <Route path="/update-room" element={<UpdateRoom />} />
       </Routes>
       { isLoggedIn ? <NavbarLoggedIn /> : null }
     </>

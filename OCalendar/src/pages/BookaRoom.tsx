@@ -40,7 +40,6 @@ function BookaRoom() {
 
     return (
     <>
-        <NavLink to="/">Go Back Home</NavLink>
         <div className="booking-container">
             {/* LEFT COLUMN */}
             <div className="left-column">

@@ -13,3 +13,7 @@
     margin-bottom: 10px;
     overflow-y: auto;
 }
+
+.room-comment-card textarea {
+    width: 100%;
+}
