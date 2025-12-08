@@ -38,7 +38,8 @@ public class EventService : IEventService
             RoomBooking = roomBooking,
             fromDateTime = eventDto.startDateTime,
             untilDateTime = eventDto.endDateTime,
-            CreatedByUser = createdByUser
+            CreatedByUser = createdByUser,
+            CreateDateTime = DateTime.Now
         };
 
         _eventRepo.Add(newEvent);
@@ -79,6 +80,7 @@ public class EventService : IEventService
         foundEvent.RoomBooking = roomBooking;
         foundEvent.fromDateTime = eventDto.startDateTime;
         foundEvent.untilDateTime = eventDto.endDateTime;
+        foundEvent.UpdateDateTime = DateTime.Now;
 
         _eventRepo.Update(foundEvent);
         _eventRepo.SaveChanges();

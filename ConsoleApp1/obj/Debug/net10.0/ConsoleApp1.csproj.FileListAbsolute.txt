@@ -1,0 +1,15 @@
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/bin/Debug/net10.0/ConsoleApp1
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/bin/Debug/net10.0/ConsoleApp1.deps.json
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/bin/Debug/net10.0/ConsoleApp1.runtimeconfig.json
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/bin/Debug/net10.0/ConsoleApp1.dll
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/bin/Debug/net10.0/ConsoleApp1.pdb
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.AssemblyInfoInputs.cache
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.AssemblyInfo.cs
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.csproj.CoreCompileInputs.cache
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.sourcelink.json
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.dll
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/refint/ConsoleApp1.dll
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.pdb
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.genruntimeconfig.cache
+/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/ConsoleApp1/obj/Debug/net10.0/ref/ConsoleApp1.dll

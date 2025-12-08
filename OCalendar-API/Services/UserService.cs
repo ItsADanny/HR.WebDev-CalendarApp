@@ -34,6 +34,7 @@ public class UserService : IUserService
             FirstName = userDto.firstName,
             LastName = userDto.lastName,
             Role = foundRole,
+            CreateDateTime = DateTime.Now
         };
 
         _userRepo.Add(newUser);
@@ -72,6 +73,7 @@ public class UserService : IUserService
         foundUser.FirstName = userDto.firstName;
         foundUser.LastName = userDto.lastName;
         foundUser.Role = foundRole;
+        foundUser.UpdateDateTime = DateTime.Now;
 
         _userRepo.Update(foundUser);
         _userRepo.SaveChanges();

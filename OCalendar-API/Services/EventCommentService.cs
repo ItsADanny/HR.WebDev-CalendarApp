@@ -31,7 +31,8 @@ public class EventCommentService : IEventCommentService
         {
             Event = foundEvent,
             User = foundUser,
-            Comment = eventCommentDto.comment
+            Comment = eventCommentDto.comment,
+            CreateDateTime = DateTime.Now
         };
 
         _eventCommentRepo.Add(newCommentEvent);
@@ -63,6 +64,7 @@ public class EventCommentService : IEventCommentService
         if (foundEventComment == null) return null;
 
         foundEventComment.Comment = eventCommentDto.comment;
+        foundEventComment.CreateDateTime = DateTime.Now;
 
         _eventCommentRepo.Update(foundEventComment);
         _eventCommentRepo.SaveChanges();

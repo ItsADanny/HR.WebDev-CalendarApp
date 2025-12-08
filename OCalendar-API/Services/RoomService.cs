@@ -33,7 +33,8 @@ public class RoomService : IRoomService
             Name = roomDto.name,
             Location = foundLocation,
             Active = roomDto.active,
-            CreatedByUser = foundUser
+            CreatedByUser = foundUser,
+            CreateDateTime = DateTime.Now
         };
 
         _roomRepo.Add(newRoom);
@@ -72,7 +73,8 @@ public class RoomService : IRoomService
         foundRoom.Name = roomDto.name;
         foundRoom.Location = foundLocation;
         foundRoom.Active = roomDto.active;
-        foundRoom.CreatedByUser = foundUser;
+        foundRoom.UpdatedByUser = foundUser;
+        foundRoom.UpdateDateTime = DateTime.Now;
 
         _roomRepo.Update(foundRoom);
         _roomRepo.SaveChanges();

@@ -30,7 +30,8 @@ public class RoleService : IRoleService
             AllowedManageTimeslots = roleDto.allowedManageTimeslots,
             AllowedManageUsers = roleDto.allowedManageUsers,
             AllowedManageEvents = roleDto.allowedManageEvents,
-            CreateByUser = foundUser
+            CreateByUser = foundUser,
+            CreateDateTime = DateTime.Now
         };
 
         _roleRepo.Add(newRole);
@@ -67,6 +68,7 @@ public class RoleService : IRoleService
         foundRole.AllowedManageUsers = roleDto.allowedManageUsers;
         foundRole.AllowedManageEvents = roleDto.allowedManageEvents;
         foundRole.UpdateByUser = foundUser;
+        foundRole.UpdateDateTime = DateTime.Now;
 
         _roleRepo.Update(foundRole);
         _roleRepo.SaveChanges();

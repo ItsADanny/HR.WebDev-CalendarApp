@@ -35,7 +35,8 @@ public class RoomBookingService : IRoomBookingService
         {
             Room = foundRoom,
             Timeslot = foundTimeslot,
-            BookedByUser = foundUser
+            BookedByUser = foundUser,
+            CreateDateTime = DateTime.Now
         };
 
         _roomBookingRepo.Add(newRoomBooking);
@@ -68,6 +69,7 @@ public class RoomBookingService : IRoomBookingService
 
         Timeslot? foundTimeslot = _timeslotRepo.GetByID(roomBookingDto.timeslotID);
         foundRoomBooking.Timeslot = foundTimeslot;
+        foundRoomBooking.UpdateDateTime = DateTime.Now;
 
         _roomBookingRepo.Update(foundRoomBooking);
         _roomBookingRepo.SaveChanges();

@@ -37,6 +37,7 @@ public class LocationService : ILocationService
             Lon = locationDto.lon,
             Lat = locationDto.lat,
             CreatedByUser = foundUser,
+            CreateDateTime = DateTime.Now
         };
 
         _locationRepo.Add(newLocation);
@@ -68,6 +69,9 @@ public class LocationService : ILocationService
     {
         Location? foundLocation = _locationRepo.GetByID(id);
         if (foundLocation == null) return null;
+
+        User? foundUser = _userRepo.GetByID(locationDto.userID);
+
         foundLocation.Name = locationDto.name;
         foundLocation.HouseNumber = locationDto.houseNumber;
         foundLocation.HouseNumberAdditive = locationDto.houseNumberAdditive;
@@ -75,6 +79,8 @@ public class LocationService : ILocationService
         foundLocation.City = locationDto.city;
         foundLocation.Lon = locationDto.lon;
         foundLocation.Lat = locationDto.lat;
+        foundLocation.UpdatedByUser = foundUser;
+        foundLocation.UpdateDateTime = DateTime.Now;
 
         _locationRepo.Update(foundLocation);
         _locationRepo.SaveChanges();

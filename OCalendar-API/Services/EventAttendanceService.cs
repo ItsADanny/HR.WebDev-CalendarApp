@@ -29,7 +29,8 @@ public class EventAttendanceService : IEventAttendanceService
         {
             User = foundUser,
             Event = foundEvent,
-            Attending = eventAttendingDto.attending
+            Attending = eventAttendingDto.attending,
+            CreateDateTime = DateTime.Now
         };
 
         _eventAttendanceRepo.Add(newEventAttendance);
@@ -49,6 +50,7 @@ public class EventAttendanceService : IEventAttendanceService
         if (foundEventAttendance == null) return null;
 
         foundEventAttendance.Attending = eventAttendingDto.attending;
+        foundEventAttendance.UpdateDateTime = DateTime.Now;
 
         _eventAttendanceRepo.Update(foundEventAttendance);
         _eventAttendanceRepo.SaveChanges();

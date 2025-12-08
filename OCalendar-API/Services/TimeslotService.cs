@@ -35,7 +35,8 @@ public class TimeslotService : ITimeslotService
             StartTime = TimeslotDto.startTime,
             EndTime = TimeslotDto.endTime,
             Date = TimeslotDto.date,
-            CreatedByUser = foundUser
+            CreatedByUser = foundUser,
+            CreateDateTime = DateTime.Now
         };
 
         _timeslotRepo.Add(newTimeslot);
@@ -77,6 +78,7 @@ public class TimeslotService : ITimeslotService
         foundTimeslot.EndTime = TimeslotDto.endTime;
         foundTimeslot.Date = TimeslotDto.date;
         foundTimeslot.UpdatedByUser = foundUser;
+        foundTimeslot.UpdateDateTime = DateTime.Now;
 
         _timeslotRepo.Update(foundTimeslot);
         _timeslotRepo.SaveChanges();
