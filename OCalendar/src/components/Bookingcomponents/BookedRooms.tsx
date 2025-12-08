@@ -1,30 +1,46 @@
 import './css/BookedRooms.css';
+import { useState, useEffect } from 'react';
+import type { BookedRoom } from './bookedroom.type.ts'
+import BookedRoomItem from './BookedRoomItem.tsx';
 
-interface BookedRoom {
-  id: string;
-  title: string;
-  roomNumber: string;
-  location: string;
-  timeslot?: string;
-}
+function BookedRooms() {
+    const [status, setStatus] = useState<string>('idle');
+    const [bookedRooms, setBookedRooms] = useState<BookedRoom[]>([]);
 
-interface BookedRoomsListProps {
-  rooms: BookedRoom[];
-  onSelect: (room: BookedRoom) => void;
-}
+    useEffect(() => {
+    async function getBookedRooms() {
+        setStatus('loading');
 
-function BookedRooms({ rooms, onSelect }: BookedRoomsListProps) {
+        try {
+            const response = await fetch(`http://localhost:5050/RoomBooking`, {method: 'GET'});
+            const data = await response.json();
+            setBookedRooms(data);
+
+        } catch(error) {
+            console.log('Failed to load todo items: ', error);
+        } finally {
+            setStatus('idle');
+        }
+    }
+
+    getBookedRooms();
+    }, []);
+
   return (
     <div className="booked-rooms-list">
-
-      {rooms.map((room) => (
-        <div
-          key={room.id}
-          className="booked-room-item"
-          onClick={() => onSelect(room)}
-        >
-          {room.title}
-        </div>
+      { status === 'loading' && <p>Loading...</p> }
+      
+      {bookedRooms.map((room) => (
+        <BookedRoomItem
+          key={room.id} 
+          bookedroom={{
+            id: '',
+            title: '',
+            roomNumber: '',
+            location: '',
+            timeslot: undefined
+          }}
+        />
       ))}
     </div>
   );

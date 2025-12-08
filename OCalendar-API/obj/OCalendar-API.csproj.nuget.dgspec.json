@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/OCalendar-API.csproj": {}
+    "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\OCalendar-API.csproj": {}
   },
   "projects": {
-    "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/OCalendar-API.csproj": {
+    "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\OCalendar-API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/OCalendar-API.csproj",
+        "projectUniqueName": "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\OCalendar-API.csproj",
         "projectName": "OCalendar-API",
-        "projectPath": "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/OCalendar-API.csproj",
-        "packagesPath": "/Users/dannydesnoo/.nuget/packages/",
-        "outputPath": "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/obj/",
+        "projectPath": "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\OCalendar-API.csproj",
+        "packagesPath": "C:\\Users\\ryand\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/dannydesnoo/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ryand\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -92,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
