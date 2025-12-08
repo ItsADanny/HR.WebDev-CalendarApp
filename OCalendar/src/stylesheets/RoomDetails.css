@@ -1,0 +1,71 @@
+.RoomDetails {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.RoomDetails__titleContainer {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.RoomDetails__title-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.RoomDetails__info { 
+    color: #ff2525;
+    text-align: left;
+}
+
+.RoomDetails__underline {
+    width: 95%; 
+    height: 2px;
+    background: #111111c2;
+    border-radius: 1px; /* rounded edges */
+    margin-bottom: 6px;  /* Space under the underline */
+}
+
+.RoomDetails__booked-btn {
+    background: orange; /* NEEDS TO BE SWITCHED ON AND OFF IF YOU BOOK? */
+    color: #fff;
+    border-radius: 9999px;
+    padding: 10px 50px; /* Puffing the button */
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-bottom: 6px;
+}
+
+.RoomDetails__cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+.RoomDetails__infocard {
+    flex: 3;
+    background: var(--OrangeCompany_GreyBox_LightMode);
+    border-radius: 25px;
+    padding: 24px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.08);
+    min-height: 0;
+}
+
+.RoomDetails__commentcard {
+    flex: 2;
+    background: var(--OrangeCompany_GreyBox_LightMode);
+    border-radius: 25px;
+    padding: 24px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.08);
+    min-height: 0;
+    overflow-y: auto;
+}

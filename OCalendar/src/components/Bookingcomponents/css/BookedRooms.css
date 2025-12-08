@@ -1,0 +1,17 @@
+.booked-rooms-list {
+  padding: 20px;
+}
+
+.booked-room-item {
+  background-color: #ffb09c;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.booked-room-item:hover {
+  background-color: #ff9c85;
+}

@@ -1,0 +1,91 @@
+/*Define the Colours for the application*/
+:root {
+    /* Generic colors */
+    --OrangeCompany_BrandOrange: #F37923;     /* RGB Code: 243 121 35  */
+    --OrangeCompany_Orange: #FE7743;          /* RGB Code: 254 119 67  */
+    --OrangeCompany_LightOrange: #FEA07B;     /* RGB Code: 254 160 123 */
+    --OrangeCompany_DarkOrange: #D35E0C;      /* RGB Code: 211 94  12  */
+
+    /* Light mode colors */
+    --OrangeCompany_OffWhite: #EFEEEA;        /* RGB Code: 239 238 234 */
+    --OrangeCompany_CardWhite: #FBFBFA;       /* RGB Code: 251 251 250 */
+    --OrangeCompany_GreyBox_LightMode: #8f8f8f;
+
+    /* Dark mode colors */
+    --OrangeCompany_OffBlack: #1C1C1C;        /* RGB Code:  28  28  28 */
+    --OrangeCompany_CardBlack: #353535;       /* RGB Code:  53  53  53 */
+    --OrangeCompany_CardBlack_Box: #4c4c4c;
+    /*Colours can be called with: var([COLOUR NAME])*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    position: fixed;
+    left: 50%;
+    bottom: 50px;
+    transform: translateX(-50%);
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1.5px 4px rgba(0,0,0,0.06);
+    display: flex;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    gap: 20px; /* space between buttons */
+    padding: 6px;
+    align-items: center;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--OrangeCompany_LightOrange);
+    color: var(--OrangeCompany_CardBlack);
+    text-decoration: none;
+    padding: 20px 48px;
+    border-radius: 15px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    border: none;
+    min-width: 220px;
+    min-height: 80px;
+    letter-spacing: 0.01em;
+}
+
+.nav-link:hover {
+    background-color: var(--OrangeCompany_Orange);
+}
+
+.nav-link.active {
+    background: var(--OrangeCompany_BrandOrange);
+    color: #222;
+    font-weight: 500;
+    box-shadow: 0 4px 24px rgba(255,183,77,0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+    nav {
+        background: var(--OrangeCompany_CardBlack);
+        box-shadow: 4px 4px 5px rgba(243, 121, 35, 0.75);
+    }
+
+    .nav-link {
+        background: var(--OrangeCompany_BrandOrange);
+        color: var(--OrangeCompany_OffWhite);
+    }
+
+    .nav-link.active {
+        background: var(--OrangeCompany_DarkOrange);
+        color: var(--OrangeCompany_CardWhite);
+    }
+
+    .nav-link:hover {
+        background-color: var(--OrangeCompany_Orange);
+        color: var(--OrangeCompany_CardWhite);
+    }
+}

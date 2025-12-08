@@ -1,0 +1,60 @@
+.BookedRooms__underline {
+    width: 100%; 
+    height: 2px;
+    background: #111111c2;
+    border-radius: 1px; /* rounded edges */
+    margin-bottom: 6px;  /* Space under the underline */
+}
+
+/* Booked rooms list */
+.BookRoomList__container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.BookRoomList__item {
+    background: var(--OrangeCompany_LightOrange);
+    color: #ffffff;
+    border-radius: 9999px; /* I was lazy */
+    padding: 12px 24px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.BookRoomList__item:hover,
+.BookRoomList__item:focus {
+    background: var(--OrangeCompany_Orange);
+}
+/* Booked rooms list */
+
+.BookedRooms__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.BookedRooms__NavContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+    padding-top: 10px;
+    align-items: center;
+    margin-top: auto;
+}
+
+.BookedRooms__nav-link {
+    width: 100%;
+    padding: 10px 10px;
+    background: var(--OrangeCompany_LightOrange);
+    border-radius: 9999px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.BookedRooms__nav-link:hover,
+.BookedRooms__nav-link:focus {
+    background: var(--OrangeCompany_Orange);
+}
