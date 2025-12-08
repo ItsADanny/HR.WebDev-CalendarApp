@@ -11,13 +11,24 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 //Add the AppContext (Database)
 builder.Services.AddDbContext<AppContext>(options =>
-    options.UseSqlite("Data source=local.db"));
+    options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
 // Add the controllers
 builder.Services.AddControllers();
 //Add the EndpointsApiExplorer and SwaggerGen
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add CORS
+var frontendUrl = builder.Configuration["Frontend:Url"];
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendPolicy", policy =>
+        policy.WithOrigins(frontendUrl!)
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials());
+});
 
 // Add the services
 builder.Services.AddScoped<IEventService, EventService>();
@@ -27,15 +38,22 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IRoomBookingService, RoomBookingService>();
 builder.Services.AddScoped<ITimeslotService, TimeslotService>();
-
-//Wordt door Ryan gedaan
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 
 var app = builder.Build();
 
+// Use CORS
+app.UseCors("FrontendPolicy");
+
+// IMPORTANT: Set URLs from config
+var httpUrl = builder.Configuration["BackendUrls:Http"];
+if (!string.IsNullOrEmpty(httpUrl))
+    app.Urls.Add(httpUrl);
+
+//[DISABLED], Because we use CORS
 // Define application URL
-app.Urls.Add("http://localhost:5050");
+// app.Urls.Add("http://localhost:5050");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -59,14 +77,3 @@ app.MapControllers();
 
 app.UseHttpsRedirection();
 app.Run();
-
-//Records
-public record EventDto(string title, string description, int? roomBookingID, DateTime startDateTime, DateTime endDateTime, int userID);
-public record EventAttendingDto(int userID, int eventID, bool attending);
-public record EventCommentDto(int eventID, int userID, string comment);
-public record RoleDto(string name, int allowedManageRooms, int allowedManageTimeslots, int allowedManageUsers, int allowedManageEvents, int userID);
-public record RoomDto(string name, int locationId, bool active, int userID);
-public record RoomBookingDto(int roomID, int timeslotID, int userID);
-public record TimeslotDto(int roomID, string name, TimeOnly startTime, TimeOnly endTime, DateOnly date, int userID);
-public record UserDto(string email, string password, string firstName, string lastName, int roleID);
-public record LocationDto(string name, int houseNumber, string houseNumberAdditive, string street, string city, double lon, double lat, int userID);

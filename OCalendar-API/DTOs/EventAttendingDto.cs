@@ -1,0 +1,1 @@
+public record EventAttendingDto(int userID, int eventID, bool attending);
