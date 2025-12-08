@@ -1,0 +1,1 @@
+public record LocationDto(string name, int houseNumber, string houseNumberAdditive, string street, string city, double lon, double lat, int userID);

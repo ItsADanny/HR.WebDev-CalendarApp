@@ -1,0 +1,1 @@
+public record UserDto(string email, string password, string firstName, string lastName, int roleID);
