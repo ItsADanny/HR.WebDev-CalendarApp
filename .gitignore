@@ -2,3 +2,14 @@
 /.idea
 .DS_Store
 /.vscode
+OCalendar-API/obj/Debug/net10.0/apphost.exe
+OCalendar-API/obj/Debug/net10.0/OCalendar-API.AssemblyInfo.cs
+OCalendar-API/obj/Debug/net10.0/OCalendar-API.AssemblyInfoInputs.cache
+OCalendar-API/obj/Debug/net10.0/OCalendar-API.assets.cache
+OCalendar-API/obj/Debug/net10.0/OCalendar-API.csproj.AssemblyReference.cache
+OCalendar-API/obj/Debug/net10.0/OCalendar-API.GeneratedMSBuildEditorConfig.editorconfig
+OCalendar-API/obj/OCalendar-API.csproj.nuget.dgspec.json
+OCalendar-API/obj/OCalendar-API.csproj.nuget.g.props
+OCalendar-API/obj/OCalendar-API.csproj.nuget.g.targets
+OCalendar-API/obj/project.assets.json
+OCalendar-API/obj/project.nuget.cache
