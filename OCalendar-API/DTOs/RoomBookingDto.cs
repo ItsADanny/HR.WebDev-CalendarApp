@@ -1,0 +1,1 @@
+public record RoomBookingDto(int roomID, int timeslotID, int userID);

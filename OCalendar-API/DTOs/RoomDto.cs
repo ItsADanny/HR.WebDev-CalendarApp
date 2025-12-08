@@ -1,0 +1,1 @@
+public record RoomDto(string name, int locationId, bool active, int userID);

@@ -1,0 +1,1 @@
+public record EventCommentDto(int eventID, int userID, string comment);

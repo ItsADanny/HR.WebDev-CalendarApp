@@ -1,0 +1,1 @@
+public record EventDto(string title, string description, int? roomBookingID, DateTime startDateTime, DateTime endDateTime, int userID);
