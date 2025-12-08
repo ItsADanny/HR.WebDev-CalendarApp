@@ -11,21 +11,26 @@ public interface IRoleService
 public class RoleService : IRoleService
 {
     private readonly IRepository<Role> _roleRepo;
+    private readonly IRepository<User> _userRepo;
 
-    public RoleService(IRepository<Role> repository)
+    public RoleService(IRepository<Role> repository, IRepository<User> userRepository)
     {
         _roleRepo = repository;
+        _userRepo = userRepository;
     }
 
     public Role Create(RoleDto roleDto)
     {
+        User? foundUser = _userRepo.GetByID(roleDto.userID);
+
         Role newRole = new Role
         {
             Name = roleDto.name,
             AllowedManageRooms = roleDto.allowedManageRooms,
             AllowedManageTimeslots = roleDto.allowedManageTimeslots,
             AllowedManageUsers = roleDto.allowedManageUsers,
-            AllowedManageEvents = roleDto.allowedManageEvents
+            AllowedManageEvents = roleDto.allowedManageEvents,
+            CreateByUser = foundUser
         };
 
         _roleRepo.Add(newRole);
@@ -54,11 +59,14 @@ public class RoleService : IRoleService
         Role? foundRole = _roleRepo.GetByID(id);
         if (foundRole == null) return null;
 
+        User? foundUser = _userRepo.GetByID(roleDto.userID);
+
         foundRole.Name = roleDto.name;
         foundRole.AllowedManageRooms = roleDto.allowedManageRooms;
         foundRole.AllowedManageTimeslots = roleDto.allowedManageTimeslots;
         foundRole.AllowedManageUsers = roleDto.allowedManageUsers;
         foundRole.AllowedManageEvents = roleDto.allowedManageEvents;
+        foundRole.UpdateByUser = foundUser;
 
         _roleRepo.Update(foundRole);
         _roleRepo.SaveChanges();

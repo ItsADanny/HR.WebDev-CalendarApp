@@ -13,20 +13,27 @@ public interface IRoomService
 public class RoomService : IRoomService
 {
     private readonly IRepository<Room> _roomRepo;
+    private readonly IRepository<Location> _locationRepo;
+    private readonly IRepository<User> _userRepo;
 
-    public RoomService(IRepository<Room> repository)
+    public RoomService(IRepository<Room> repository, IRepository<Location> locationRepository, IRepository<User> userRepository)
     {
         _roomRepo = repository;
+        _locationRepo = locationRepository;
+        _userRepo = userRepository;
     }
 
     public Room Create(RoomDto roomDto)
     {
+        Location? foundLocation = _locationRepo.GetByID(roomDto.locationId);
+        User? foundUser = _userRepo.GetByID(roomDto.userID);
+
         Room newRoom = new Room
         {
             Name = roomDto.name,
-            LocationId = roomDto.locationId,
+            Location = foundLocation,
             Active = roomDto.active,
-            CreatedByUserID = roomDto.userID
+            CreatedByUser = foundUser
         };
 
         _roomRepo.Add(newRoom);
@@ -50,7 +57,7 @@ public class RoomService : IRoomService
 
     public Room? GetByID(int id) => _roomRepo.GetByID(id);
 
-    public IEnumerable<Room> GetByLocation(int id) => _roomRepo.GetBy(p => p.LocationId == id);
+    public IEnumerable<Room> GetByLocation(int id) => _roomRepo.GetBy(p => p.Location == _locationRepo.GetByID(id));
 
     public IEnumerable<Room> GetInActive() => _roomRepo.GetBy(p => p.Active == false);
 
@@ -59,10 +66,13 @@ public class RoomService : IRoomService
         Room? foundRoom = _roomRepo.GetByID(id);
         if (foundRoom == null) return null;
 
+        Location? foundLocation = _locationRepo.GetByID(roomDto.locationId);
+        User? foundUser = _userRepo.GetByID(roomDto.userID);
+
         foundRoom.Name = roomDto.name;
-        foundRoom.LocationId = roomDto.locationId;
+        foundRoom.Location = foundLocation;
         foundRoom.Active = roomDto.active;
-        foundRoom.CreatedByUserID = roomDto.userID;
+        foundRoom.CreatedByUser = foundUser;
 
         _roomRepo.Update(foundRoom);
         _roomRepo.SaveChanges();

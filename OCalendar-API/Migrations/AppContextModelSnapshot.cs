@@ -25,14 +25,14 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CreatedByUserID")
+                    b.Property<int>("CreatedByUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("RoomBookingID")
+                    b.Property<int?>("RoomBookingId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -50,6 +50,10 @@ namespace OCalendar_API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("RoomBookingId");
+
                     b.ToTable("Events");
                 });
 
@@ -65,16 +69,20 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("EventID")
+                    b.Property<int>("EventId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserID")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("EventAttendances");
                 });
@@ -92,16 +100,20 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("EventID")
+                    b.Property<int>("EventId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserID")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("EventComments");
                 });
@@ -119,7 +131,7 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CreatedByUserID")
+                    b.Property<int>("CreatedByUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("HouseNumber")
@@ -146,10 +158,14 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UpdatedByUserID")
+                    b.Property<int?>("UpdatedByUserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("UpdatedByUserId");
 
                     b.ToTable("locations");
                 });
@@ -172,23 +188,27 @@ namespace OCalendar_API.Migrations
                     b.Property<int>("AllowedManageUsers")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("CreateByUserId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("CreatedByUserID")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("UpdateByUserId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UpdatedByUserID")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CreateByUserId");
+
+                    b.HasIndex("UpdateByUserId");
 
                     b.ToTable("Roles");
                 });
@@ -205,7 +225,7 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CreatedByUserID")
+                    b.Property<int>("CreatedByUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("LocationId")
@@ -218,10 +238,16 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UpdatedByUserID")
+                    b.Property<int?>("UpdatedByUserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("UpdatedByUserId");
 
                     b.ToTable("Rooms");
                 });
@@ -232,22 +258,28 @@ namespace OCalendar_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BookedByUserID")
+                    b.Property<int>("BookedByUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RoomID")
+                    b.Property<int>("RoomId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TimeSlotID")
+                    b.Property<int>("TimeslotId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookedByUserId");
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("TimeslotId");
 
                     b.ToTable("RoomBookings");
                 });
@@ -268,10 +300,12 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserID")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Salts");
                 });
@@ -285,7 +319,7 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CreatedByUserID")
+                    b.Property<int>("CreatedByUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("Date")
@@ -298,7 +332,7 @@ namespace OCalendar_API.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RoomID")
+                    b.Property<int>("RoomId")
                         .HasColumnType("INTEGER");
 
                     b.Property<TimeOnly>("StartTime")
@@ -307,10 +341,16 @@ namespace OCalendar_API.Migrations
                     b.Property<DateTime?>("UpdateDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UpdatedByUserID")
+                    b.Property<int?>("UpdatedByUserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("UpdatedByUserId");
 
                     b.ToTable("timeslots");
                 });
@@ -340,7 +380,7 @@ namespace OCalendar_API.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RoleID")
+                    b.Property<int>("RoleId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("UpdateDateTime")
@@ -348,7 +388,197 @@ namespace OCalendar_API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Event", b =>
+                {
+                    b.HasOne("User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RoomBooking", "RoomBooking")
+                        .WithMany()
+                        .HasForeignKey("RoomBookingId");
+
+                    b.Navigation("CreatedByUser");
+
+                    b.Navigation("RoomBooking");
+                });
+
+            modelBuilder.Entity("EventAttendance", b =>
+                {
+                    b.HasOne("Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EventComment", b =>
+                {
+                    b.HasOne("Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Location", b =>
+                {
+                    b.HasOne("User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("User", "UpdatedByUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedByUserId");
+
+                    b.Navigation("CreatedByUser");
+
+                    b.Navigation("UpdatedByUser");
+                });
+
+            modelBuilder.Entity("Role", b =>
+                {
+                    b.HasOne("User", "CreateByUser")
+                        .WithMany()
+                        .HasForeignKey("CreateByUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("User", "UpdateByUser")
+                        .WithMany()
+                        .HasForeignKey("UpdateByUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("CreateByUser");
+
+                    b.Navigation("UpdateByUser");
+                });
+
+            modelBuilder.Entity("Room", b =>
+                {
+                    b.HasOne("User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("User", "UpdatedByUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedByUserId");
+
+                    b.Navigation("CreatedByUser");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("UpdatedByUser");
+                });
+
+            modelBuilder.Entity("RoomBooking", b =>
+                {
+                    b.HasOne("User", "BookedByUser")
+                        .WithMany()
+                        .HasForeignKey("BookedByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Timeslot", "Timeslot")
+                        .WithMany()
+                        .HasForeignKey("TimeslotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BookedByUser");
+
+                    b.Navigation("Room");
+
+                    b.Navigation("Timeslot");
+                });
+
+            modelBuilder.Entity("Salt", b =>
+                {
+                    b.HasOne("User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Timeslot", b =>
+                {
+                    b.HasOne("User", "CreatedByUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("User", "UpdatedByUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedByUserId");
+
+                    b.Navigation("CreatedByUser");
+
+                    b.Navigation("Room");
+
+                    b.Navigation("UpdatedByUser");
+                });
+
+            modelBuilder.Entity("User", b =>
+                {
+                    b.HasOne("Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

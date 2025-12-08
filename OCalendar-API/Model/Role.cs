@@ -10,8 +10,10 @@ public class Role
     public int AllowedManageTimeslots { get; set; } = 0;
     public int AllowedManageUsers { get; set; } = 0;
     public int AllowedManageEvents { get; set; } = 0;
-    public int CreatedByUserID { get; set; }
-    public int? UpdatedByUserID { get; set; }
+    public int? CreateByUserId { get; set; }
+    public User? CreateByUser { get; set; }
+    public int? UpdateByUserId { get; set; }
+    public User? UpdateByUser { get; set; }
     public DateTime CreateDateTime { get; set; }
     public DateTime? UpdateDateTime { get; set; }
 }

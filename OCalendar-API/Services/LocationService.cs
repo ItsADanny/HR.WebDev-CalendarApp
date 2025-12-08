@@ -15,14 +15,18 @@ public interface ILocationService
 public class LocationService : ILocationService
 {
     private readonly IRepository<Location> _locationRepo;
+    private readonly IRepository<User> _userRepo;
 
-    public LocationService(IRepository<Location> repository)
+    public LocationService(IRepository<Location> repository, IRepository<User> userRepository)
     {
         _locationRepo = repository;
+        _userRepo = userRepository;
     }
 
     public Location Create(LocationDto locationDto)
     {
+        User? foundUser = _userRepo.GetByID(locationDto.userID);
+
         Location newLocation = new Location
         {
             Name = locationDto.name,
@@ -32,7 +36,7 @@ public class LocationService : ILocationService
             City = locationDto.city,
             Lon = locationDto.lon,
             Lat = locationDto.lat,
-            CreatedByUserID = locationDto.userID,
+            CreatedByUser = foundUser,
         };
 
         _locationRepo.Add(newLocation);

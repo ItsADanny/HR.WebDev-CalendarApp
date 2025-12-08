@@ -10,18 +10,25 @@ public interface IEventAttendanceService
 public class EventAttendanceService : IEventAttendanceService
 {
     private readonly IRepository<EventAttendance> _eventAttendanceRepo;
+    private readonly IRepository<User> _userRepo;
+    private readonly IRepository<Event> _eventRepo; 
 
-    public EventAttendanceService(IRepository<EventAttendance> repository)
+    public EventAttendanceService(IRepository<EventAttendance> repository, IRepository<User> userRepository, IRepository<Event> eventRepository)
     {
         _eventAttendanceRepo = repository;
+        _userRepo = userRepository;
+        _eventRepo = eventRepository;
     }
 
     public EventAttendance Create(EventAttendingDto eventAttendingDto)
     {
+        Event? foundEvent = _eventRepo.GetByID(eventAttendingDto.eventID);
+        User? foundUser = _userRepo.GetByID(eventAttendingDto.userID);
+
         EventAttendance newEventAttendance = new EventAttendance
         {
-            UserID = eventAttendingDto.userID,
-            EventID = eventAttendingDto.eventID,
+            User = foundUser,
+            Event = foundEvent,
             Attending = eventAttendingDto.attending
         };
 
@@ -30,11 +37,11 @@ public class EventAttendanceService : IEventAttendanceService
         return newEventAttendance;
     }
 
-    public IEnumerable<EventAttendance> GetByEvent(int eventID) => _eventAttendanceRepo.GetBy(ea => ea.EventID == eventID);
+    public IEnumerable<EventAttendance> GetByEvent(int eventID) => _eventAttendanceRepo.GetBy(ea => ea.Event == _eventRepo.GetByID(eventID));
 
     public EventAttendance? GetByID(int id) => _eventAttendanceRepo.GetByID(id);
 
-    public IEnumerable<EventAttendance> GetByUser(int userID) => _eventAttendanceRepo.GetBy(ea => ea.UserID == userID);
+    public IEnumerable<EventAttendance> GetByUser(int userID) => _eventAttendanceRepo.GetBy(ea => ea.User == _userRepo.GetByID(userID));
 
     public EventAttendance? Update(int id, EventAttendingDto eventAttendingDto)
     {

@@ -13,19 +13,29 @@ public interface IRoomBookingService
 public class RoomBookingService : IRoomBookingService
 {
     private readonly IRepository<RoomBooking> _roomBookingRepo;
+    private readonly IRepository<Room> _roomRepo;
+    private readonly IRepository<Timeslot> _timeslotRepo;
+    private readonly IRepository<User> _userRepo;
 
-    public RoomBookingService(IRepository<RoomBooking> repository)
+    public RoomBookingService(IRepository<RoomBooking> repository, IRepository<Room> roomRepository, IRepository<Timeslot> timeslotRepository, IRepository<User> userRepository)
     {
         _roomBookingRepo = repository;
+        _roomRepo = roomRepository;
+        _timeslotRepo = timeslotRepository;
+        _userRepo = userRepository;
     }
 
     public RoomBooking Create(RoomBookingDto roomBookingDto)
     {
+        Room? foundRoom = _roomRepo.GetByID(roomBookingDto.roomID);
+        Timeslot? foundTimeslot = _timeslotRepo.GetByID(roomBookingDto.timeslotID);
+        User? foundUser = _userRepo.GetByID(roomBookingDto.userID);
+
         RoomBooking newRoomBooking = new RoomBooking
         {
-            RoomID = roomBookingDto.roomID,
-            TimeSlotID = roomBookingDto.timeslotID,
-            BookedByUserID = roomBookingDto.userID
+            Room = foundRoom,
+            Timeslot = foundTimeslot,
+            BookedByUser = foundUser
         };
 
         _roomBookingRepo.Add(newRoomBooking);
@@ -47,16 +57,17 @@ public class RoomBookingService : IRoomBookingService
 
     public RoomBooking? GetByID(int id) => _roomBookingRepo.GetByID(id);
 
-    public IEnumerable<RoomBooking> GetByTimeslot(int timeslotId) => _roomBookingRepo.GetBy(p => p.TimeSlotID == timeslotId);
-    public IEnumerable<RoomBooking> GetByRoom(int roomId) => _roomBookingRepo.GetBy(p => p.RoomID == roomId);
-    public IEnumerable<RoomBooking> GetByUser(int userId) => _roomBookingRepo.GetBy(p => p.BookedByUserID == userId);
+    public IEnumerable<RoomBooking> GetByTimeslot(int timeslotId) => _roomBookingRepo.GetBy(p => p.Timeslot == _timeslotRepo.GetByID(timeslotId));
+    public IEnumerable<RoomBooking> GetByRoom(int roomId) => _roomBookingRepo.GetBy(p => p.Room == _roomRepo.GetByID(roomId));
+    public IEnumerable<RoomBooking> GetByUser(int userId) => _roomBookingRepo.GetBy(p => p.BookedByUser == _userRepo.GetByID(userId));
 
     public RoomBooking? Update(int id, RoomBookingDto roomBookingDto)
     {
         RoomBooking? foundRoomBooking = _roomBookingRepo.GetByID(id);
         if (foundRoomBooking == null) return null;
 
-        foundRoomBooking.TimeSlotID = roomBookingDto.timeslotID;
+        Timeslot? foundTimeslot = _timeslotRepo.GetByID(roomBookingDto.timeslotID);
+        foundRoomBooking.Timeslot = foundTimeslot;
 
         _roomBookingRepo.Update(foundRoomBooking);
         _roomBookingRepo.SaveChanges();

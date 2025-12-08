@@ -13,22 +13,29 @@ public interface ITimeslotService
 public class TimeslotService : ITimeslotService
 {
     private readonly IRepository<Timeslot> _timeslotRepo;
+    private readonly IRepository<Room> _roomRepo;
+    private readonly IRepository<User> _userRepo;
 
-    public TimeslotService(IRepository<Timeslot> repository)
+    public TimeslotService(IRepository<Timeslot> repository, IRepository<Room> roomRepository, IRepository<User> userRepository)
     {
         _timeslotRepo = repository;
+        _roomRepo = roomRepository;
+        _userRepo = userRepository;
     }
 
     public Timeslot Create(TimeslotDto TimeslotDto)
     {
+        Room? foundRoom = _roomRepo.GetByID(TimeslotDto.roomID);
+        User? foundUser = _userRepo.GetByID(TimeslotDto.userID);
+
         Timeslot newTimeslot = new Timeslot
         {
-            RoomID = TimeslotDto.roomID,
+            Room = foundRoom,
             Name = TimeslotDto.name,
             StartTime = TimeslotDto.startTime,
             EndTime = TimeslotDto.endTime,
             Date = TimeslotDto.date,
-            CreatedByUserID = TimeslotDto.userID
+            CreatedByUser = foundUser
         };
 
         _timeslotRepo.Add(newTimeslot);
@@ -54,19 +61,22 @@ public class TimeslotService : ITimeslotService
 
     public IEnumerable<Timeslot> GetByName(string search) => _timeslotRepo.GetBy(p => p.Name.Contains(search));
 
-    public IEnumerable<Timeslot> GetByRoom(int roomID) => _timeslotRepo.GetBy(p => p.RoomID == roomID);
+    public IEnumerable<Timeslot> GetByRoom(int roomID) => _timeslotRepo.GetBy(p => p.Room == _roomRepo.GetByID(roomID));
 
     public Timeslot? Update(int id, TimeslotDto TimeslotDto)
     {
         Timeslot? foundTimeslot = _timeslotRepo.GetByID(id);
         if (foundTimeslot == null) return null;
 
-        foundTimeslot.RoomID = TimeslotDto.roomID;
+        Room? foundRoom = _roomRepo.GetByID(TimeslotDto.roomID);
+        User? foundUser = _userRepo.GetByID(TimeslotDto.userID);
+
+        foundTimeslot.Room = foundRoom;
         foundTimeslot.Name = TimeslotDto.name;
         foundTimeslot.StartTime = TimeslotDto.startTime;
         foundTimeslot.EndTime = TimeslotDto.endTime;
         foundTimeslot.Date = TimeslotDto.date;
-        foundTimeslot.UpdatedByUserID = TimeslotDto.userID;
+        foundTimeslot.UpdatedByUser = foundUser;
 
         _timeslotRepo.Update(foundTimeslot);
         _timeslotRepo.SaveChanges();

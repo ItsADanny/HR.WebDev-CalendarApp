@@ -12,22 +12,33 @@ public interface IEventService
 public class EventService : IEventService
 {
     private readonly IRepository<Event> _eventRepo;
+    private readonly IRepository<RoomBooking> _roomBookingRepo;
+    private readonly IRepository<User> _userRepo;
 
-    public EventService(IRepository<Event> repository)
+    public EventService(IRepository<Event> repository, IRepository<RoomBooking> roombookingrepository, IRepository<User> userRepository)
     {
         _eventRepo = repository;
+        _roomBookingRepo = roombookingrepository;
+        _userRepo = userRepository;
     }
 
     public Event Create(EventDto eventDto)
     {
+        RoomBooking? roomBooking = null;
+        if (eventDto.roomBookingID.HasValue)
+        {
+            roomBooking = _roomBookingRepo.GetByID(eventDto.roomBookingID.Value);
+        }
+        User? createdByUser = _userRepo.GetByID(eventDto.userID);
+
         Event newEvent = new Event
         {
             Title = eventDto.title,
             Description = eventDto.description,
-            RoomBookingID = eventDto.roomBookingID,
+            RoomBooking = roomBooking,
             fromDateTime = eventDto.startDateTime,
             untilDateTime = eventDto.endDateTime,
-            CreatedByUserID = eventDto.userID
+            CreatedByUser = createdByUser
         };
 
         _eventRepo.Add(newEvent);
@@ -57,9 +68,15 @@ public class EventService : IEventService
         Event? foundEvent = _eventRepo.GetByID(id);
         if (foundEvent == null) return null;
 
+        RoomBooking? roomBooking = null;
+        if (eventDto.roomBookingID.HasValue)
+        {
+            roomBooking = _roomBookingRepo.GetByID(eventDto.roomBookingID.Value);
+        }
+
         foundEvent.Title = eventDto.title;
         foundEvent.Description = eventDto.description;
-        foundEvent.RoomBookingID = eventDto.roomBookingID;
+        foundEvent.RoomBooking = roomBooking;
         foundEvent.fromDateTime = eventDto.startDateTime;
         foundEvent.untilDateTime = eventDto.endDateTime;
 

@@ -12,18 +12,25 @@ public interface IEventCommentService
 public class EventCommentService : IEventCommentService
 {
     private readonly IRepository<EventComment> _eventCommentRepo;
+    private readonly IRepository<Event> _eventRepo;
+    private readonly IRepository<User> _userRepo;
 
-    public EventCommentService(IRepository<EventComment> repository)
+    public EventCommentService(IRepository<EventComment> repository, IRepository<Event> eventRepository, IRepository<User> userRepository)
     {
         _eventCommentRepo = repository;
+        _eventRepo = eventRepository;
+        _userRepo = userRepository;
     }
 
     public EventComment Create(EventCommentDto eventCommentDto)
     {
+        Event? foundEvent = _eventRepo.GetByID(eventCommentDto.eventID);
+        User? foundUser = _userRepo.GetByID(eventCommentDto.userID);
+
         EventComment newCommentEvent = new EventComment
         {
-            EventID = eventCommentDto.eventID,
-            UserID = eventCommentDto.userID,
+            Event = foundEvent,
+            User = foundUser,
             Comment = eventCommentDto.comment
         };
 
@@ -44,7 +51,7 @@ public class EventCommentService : IEventCommentService
 
     public IEnumerable<EventComment> GetAll() => _eventCommentRepo.ReadAll();
 
-    public IEnumerable<EventComment> GetByEvent(int eventID) => _eventCommentRepo.GetBy(p => p.EventID == eventID);
+    public IEnumerable<EventComment> GetByEvent(int eventID) => _eventCommentRepo.GetBy(p => p.Event == _eventRepo.GetByID(eventID));
 
     public EventComment? GetByID(int id) => _eventCommentRepo.GetByID(id);
 

@@ -15,6 +15,23 @@ public class AppContext : DbContext
 
     public AppContext(DbContextOptions<AppContext> options) : base(options) { }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Role>()
+            .HasOne(r => r.CreateByUser)
+            .WithMany()
+            .HasForeignKey(r => r.CreateByUserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Role>()
+            .HasOne(r => r.UpdateByUser)
+            .WithMany()
+            .HasForeignKey(r => r.UpdateByUserId)
+            .OnDelete(DeleteBehavior.Restrict);
+    }
+
     // protected override void OnConfiguring(DbContextOptionsBuilder options)
     // {
     //     base.OnConfiguring(options);

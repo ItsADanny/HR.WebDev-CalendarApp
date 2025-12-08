@@ -15,21 +15,25 @@ public interface IUserService
 public class UserService : IUserService
 {
     private readonly IRepository<User> _userRepo;
+    private readonly IRepository<Role> _roleRepo;
 
-    public UserService(IRepository<User> repository)
+    public UserService(IRepository<User> repository, IRepository<Role> roleRepository)
     {
         _userRepo = repository;
+        _roleRepo = roleRepository;
     }
 
     public User Create(UserDto userDto)
     {
+        Role? foundRole = _roleRepo.GetByID(userDto.roleID);
+
         User newUser = new User
         {
             Email = userDto.email,
             Password = userDto.password,
             FirstName = userDto.firstName,
             LastName = userDto.lastName,
-            RoleID = userDto.roleID,
+            Role = foundRole,
         };
 
         _userRepo.Add(newUser);
@@ -50,7 +54,7 @@ public class UserService : IUserService
     public IEnumerable<User> GetAll() => _userRepo.ReadAll();
 
     public User? GetByID(int id) => _userRepo.GetByID(id);
-    public IEnumerable<User> GetByRoleID(int roleID) => _userRepo.GetBy(p => p.RoleID == roleID);
+    public IEnumerable<User> GetByRoleID(int roleID) => _userRepo.GetBy(p => p.Role == _roleRepo.GetByID(roleID));
 
     public IEnumerable<User> GetByEmail(string email) => _userRepo.GetBy(p => p.Email.Contains(email));
     public IEnumerable<User> GetByFirstName(string firstName) => _userRepo.GetBy(p => p.FirstName.Contains(firstName));
@@ -61,11 +65,13 @@ public class UserService : IUserService
         User? foundUser = _userRepo.GetByID(id);
         if (foundUser == null) return null;
 
+        Role? foundRole = _roleRepo.GetByID(userDto.roleID);
+
         foundUser.Email = userDto.email;
         foundUser.Password = userDto.password;
         foundUser.FirstName = userDto.firstName;
         foundUser.LastName = userDto.lastName;
-        foundUser.RoleID = userDto.roleID;
+        foundUser.Role = foundRole;
 
         _userRepo.Update(foundUser);
         _userRepo.SaveChanges();
