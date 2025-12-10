@@ -13,3 +13,5 @@ OCalendar-API/obj/OCalendar-API.csproj.nuget.g.props
 OCalendar-API/obj/OCalendar-API.csproj.nuget.g.targets
 OCalendar-API/obj/project.assets.json
 OCalendar-API/obj/project.nuget.cache
+OCalendar-API/local.db-shm
+OCalendar-API/local.db-wal

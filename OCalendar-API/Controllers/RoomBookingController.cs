@@ -22,6 +22,7 @@ public class RoomBookingController : ControllerBase
     {
         RoomBooking? foundRoomBooking = _RoomBookingService.GetByID(id);
         if (foundRoomBooking == null) return NotFound();
+        
         return Ok(foundRoomBooking);
     }
 
