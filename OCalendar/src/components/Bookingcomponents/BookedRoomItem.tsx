@@ -5,8 +5,8 @@ import "./css/BookedRoomItem.css";
 export default function BookedRoomItem(props: {bookedroom: BookedRoom}) {
 
   return (
-    <li className='bookedrooms-list'>
-        {props.bookedroom.id}
-    </li>
+    <>
+      <button className='bookedrooms-list'>{props.bookedroom.id}</button>
+    </>
   );
 }
