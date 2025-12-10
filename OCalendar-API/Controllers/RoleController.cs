@@ -36,6 +36,14 @@ public class RoleController : ControllerBase
         return Ok(foundRoles);
     }
 
+    [HttpGet("user/{userId:int}")]
+    public ActionResult<Role> GetByUserId(int userId)
+    {
+        Role? foundRole = _roleService.GetByUserId(userId);
+        if (foundRole == null) return NotFound();
+        return Ok(foundRole);
+    }
+
     // ====================================================================================
     // POST
     // ====================================================================================

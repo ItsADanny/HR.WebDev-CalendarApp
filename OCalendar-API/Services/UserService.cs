@@ -56,7 +56,6 @@ public class UserService : IUserService
 
     public User? GetByID(int id) => _userRepo.GetByID(id);
     public IEnumerable<User> GetByRoleID(int roleID) => _userRepo.GetBy(p => p.Role == _roleRepo.GetByID(roleID));
-
     public IEnumerable<User> GetByEmail(string email) => _userRepo.GetBy(p => p.Email.Contains(email));
     public IEnumerable<User> GetByFirstName(string firstName) => _userRepo.GetBy(p => p.FirstName.Contains(firstName));
     public IEnumerable<User> GetByLastName(string lastName) => _userRepo.GetBy(p => p.LastName.Contains(lastName));

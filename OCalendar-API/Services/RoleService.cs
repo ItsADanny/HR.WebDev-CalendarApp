@@ -3,6 +3,7 @@ public interface IRoleService
     IEnumerable<Role> GetAll();
     Role? GetByID(int id);
     IEnumerable<Role> GetByName(string search);
+    Role? GetByUserId(int userId);
     Role Create(RoleDto eventDto);
     Role? Update(int id, RoleDto eventDto);
     bool Delete(int id);
@@ -54,6 +55,14 @@ public class RoleService : IRoleService
     public Role? GetByID(int id) => _roleRepo.GetByID(id);
 
     public IEnumerable<Role> GetByName(string search) => _roleRepo.GetBy(p => p.Name.Contains(search));
+
+    public Role? GetByUserId(int userId)
+    {
+        User? user = _userRepo.GetByID(userId);
+        if (user == null) return null;
+
+        return _roleRepo.GetByID(user.Role.Id);
+    }
 
     public Role? Update(int id, RoleDto roleDto)
     {
