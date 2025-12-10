@@ -33,13 +33,7 @@ function BookedRooms() {
       {bookedRooms.map((room) => (
         <BookedRoomItem
           key={room.id} 
-          bookedroom={{
-            id: '',
-            title: '',
-            roomNumber: '',
-            location: '',
-            timeslot: undefined
-          }}
+          bookedroom={room}
         />
       ))}
     </div>
