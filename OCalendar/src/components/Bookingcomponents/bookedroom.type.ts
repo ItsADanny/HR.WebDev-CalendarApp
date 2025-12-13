@@ -1,7 +1,10 @@
+export type Room = {
+    id: number;
+    name: string;
+}
+
 export type BookedRoom = {
     id: string;
-    title: string;
-    roomNumber: string;
-    location: string;
-    timeslot?: string;
+    room?: Room;
+    createDateTime: string;
 }
