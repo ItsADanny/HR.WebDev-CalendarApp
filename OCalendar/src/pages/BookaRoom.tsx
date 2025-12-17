@@ -21,14 +21,11 @@ function BookaRoom() {
             {/* LEFT COLUMN */}
             <div className="left-column">
                 <HeaderCard 
-                    title={selectedRoom && selectedRoom.roomNumber != null ? `Room ${selectedRoom.roomNumber}` : 'Select a Room'}
-                    status={selectedRoom ? "Booked" : "Available"}
+                    booking={selectedRoom}
                 />
                 <div className="cards-container">
                     <RoomInfoCard 
-                        roomNumber={selectedRoom?.roomNumber.toString()}
-                        location={selectedRoom?.location}
-                        timeslot={selectedRoom?.timeSlot}
+                        booking={selectedRoom}
                     />
                     <RoomCommentCard comments="" onChange={() => {}} />
                 </div>
@@ -36,7 +33,7 @@ function BookaRoom() {
             {/* RIGHT COLUMN */}
             <div className="right-column">
                 <p>Booked Rooms</p>
-                <BookedRooms />
+                <BookedRooms setSelectedRoom={setSelectedRoom} />
                 
                 <div className="buttons-container">
                     <button className="cancel-booking-button" onClick={() => alert('Booking Cancelled!')}>Cancel Booking</button>

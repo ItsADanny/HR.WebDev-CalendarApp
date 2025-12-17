@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import type { BookedRoom } from './bookedroom.type.ts'
 import BookedRoomItem from './BookedRoomItem.tsx';
 
-function BookedRooms() {
+function BookedRooms({ setSelectedRoom } : { setSelectedRoom: (room: BookedRoom | null) => void }) {
     const [status, setStatus] = useState<string>('idle');
     const [bookedRooms, setBookedRooms] = useState<BookedRoom[]>([]);
 
@@ -34,6 +34,7 @@ function BookedRooms() {
         <BookedRoomItem
           key={room.id} 
           bookedroom={room}
+          onClick={() => setSelectedRoom(room)}
         />
       ))}
     </div>
