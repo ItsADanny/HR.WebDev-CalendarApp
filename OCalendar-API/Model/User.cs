@@ -10,7 +10,6 @@ public class User
     public string LastName { get; set; }
     public int? RoleId { get; set; }
     [JsonIgnore]
-
     public Role Role { get; set; }
     public DateTime CreateDateTime { get; set; }
     public DateTime UpdateDateTime { get; set; }
