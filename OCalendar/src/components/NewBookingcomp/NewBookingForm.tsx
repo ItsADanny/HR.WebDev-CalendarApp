@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Room } from "../Bookingcomponents/bookedroom.type.ts";
 
 function NewBookingForm() {
@@ -8,10 +8,17 @@ function NewBookingForm() {
     
     const [form, setForm] = useState({
         location: "",
-        roomNumber: "",
+        roomName: "",
         date: "",
         timeSlot: ""
     });
+
+    useEffect(() => {
+        fetch("http://localhost:5050/Room")
+        .then(res => res.json())
+        .then(data => setRooms(data))
+        .catch(() => setMessage("Failed to load rooms"));
+    }, []);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -19,7 +26,7 @@ function NewBookingForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        alert(`Room ${form.roomNumber} at ${form.location} booked for ${form.date} at ${form.timeSlot}`);
+        alert(`Room ${form.roomName} at ${form.location} booked for ${form.date} at ${form.timeSlot}`);
 
         try {
             const response = await fetch("http://localhost:5050/RoomBooking", {
@@ -38,7 +45,7 @@ function NewBookingForm() {
             console.log("Room booked successfully:", data.message);
             setForm({
                 location: "",
-                roomNumber: "",
+                roomName: "",
                 date: "",
                 timeSlot: ""
             });
@@ -50,55 +57,54 @@ function NewBookingForm() {
     return (
         <form onSubmit={handleSubmit}>
             <label>
-                Location
+                Room
                 <select
-                    value={form.location}
-                    onChange={handleChange}
-                    name="location"
-                    required
-                    >
-                    <option value="">Select location</option>
-                    <option value="Building A">Building A</option>
-                    <option value="Building B">Building B</option>
-                    <option value="Building C">Building C</option>
-                    <option value="Building D">Building D</option>
-                </select>
-            </label>
-            <br />
-            <label>
-                Room Number
-                <input
-                name="roomNumber"
-                type="text"
-                value={form.roomNumber}
+                name="roomId"
+                value={form.roomName}
                 onChange={handleChange}
                 required
-                />
+                >
+                <option value="">Select a room</option>
+
+                {rooms.map(room => (
+                    <option key={room.id} value={room.id}>
+                    {room.location} - Room {room.name}
+                    </option>
+                ))}
+                </select>
             </label>
+
             <br />
+
             <label>
                 Date
                 <input
-                name="date"
                 type="date"
+                name="date"
                 value={form.date}
                 onChange={handleChange}
                 required
                 />
             </label>
+
             <br />
+
             <label>
-                Timeslot
+                Time Slot
                 <input
-                name="timeSlot"
                 type="time"
+                name="timeSlot"
                 value={form.timeSlot}
                 onChange={handleChange}
                 required
                 />
             </label>
+
             <br />
-            <button type="submit">Create Room</button>
+
+            <button type="submit">Book Room</button>
+
+            {message && <p>{message}</p>}
         </form>
     );
 }
