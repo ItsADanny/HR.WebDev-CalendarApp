@@ -12,6 +12,7 @@ public class AppContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<Timeslot> timeslots { get; set; }
     public DbSet<Location> locations { get; set; }
+    public DbSet<UserSession> userSessions { get; set; }
 
     public AppContext(DbContextOptions<AppContext> options) : base(options) { }
 

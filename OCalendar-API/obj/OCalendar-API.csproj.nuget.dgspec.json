@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\OCalendar-API.csproj": {}
+    "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/OCalendar-API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\OCalendar-API.csproj": {
+    "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/OCalendar-API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\OCalendar-API.csproj",
+        "projectUniqueName": "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/OCalendar-API.csproj",
         "projectName": "OCalendar-API",
-        "projectPath": "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\OCalendar-API.csproj",
-        "packagesPath": "C:\\Users\\ryand\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ryand\\Documents\\INF2\\HR.WebDev-CalendarApp\\OCalendar-API\\obj\\",
+        "projectPath": "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/OCalendar-API.csproj",
+        "packagesPath": "/Users/dannydesnoo/.nuget/packages/",
+        "outputPath": "/Users/dannydesnoo/Documents/GitHub/HR.WebDev-CalendarApp/OCalendar-API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ryand\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/dannydesnoo/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -48,7 +46,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[10.0.0, )"
+              "version": "[10.0.1, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -72,7 +70,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[10.0.1, )"
+              "version": "[10.1.0, )"
             }
           },
           "imports": [
@@ -94,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

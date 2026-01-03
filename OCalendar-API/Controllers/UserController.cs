@@ -104,7 +104,13 @@ public class UserController : ControllerBase
     [HttpPost("")]
     public ActionResult<Event> Create([FromBody] UserDto u)
     {
-        return Ok(_userService.Create(u));
+        IEnumerable<User> foundUser = _userService.GetByEmail(u.email);
+
+        if (foundUser.Count() == 0)
+        {
+            return Ok(_userService.Create(u));
+        }
+        return Conflict("User with email already exists");
     }
 
     // ====================================================================================

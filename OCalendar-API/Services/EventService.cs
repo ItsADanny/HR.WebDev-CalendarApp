@@ -2,8 +2,8 @@ public interface IEventService
 {
     IEnumerable<Event> GetAll();
     Event? GetByID(int id);
-    IEnumerable<Event> GetByMonth();
-    IEnumerable<Event> GetByMonth(int month);
+    IEnumerable<Event> GetByMonthAndYear();
+    IEnumerable<Event> GetByMonthAndYear(int month, int year);
     Event Create(EventDto eventDto);
     Event? Update(int id, EventDto eventDto);
     bool Delete(int id);
@@ -61,8 +61,8 @@ public class EventService : IEventService
 
     public Event? GetByID(int id) => _eventRepo.GetByID(id);
 
-    public IEnumerable<Event> GetByMonth() => _eventRepo.GetBy(p => p.fromDateTime.Month == DateTime.Now.Month);
-    public IEnumerable<Event> GetByMonth(int month) => _eventRepo.GetBy(p => p.fromDateTime.Month == month);
+    public IEnumerable<Event> GetByMonthAndYear() => _eventRepo.GetBy(p => p.fromDateTime.Month == DateTime.Now.Month && p.fromDateTime.Year == DateTime.Now.Year);
+    public IEnumerable<Event> GetByMonthAndYear(int month, int year) => _eventRepo.GetBy(p => p.fromDateTime.Month == month && p.fromDateTime.Year == year);
 
     public Event? Update(int id, EventDto eventDto)
     {

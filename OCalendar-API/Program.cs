@@ -40,6 +40,7 @@ builder.Services.AddScoped<IRoomBookingService, RoomBookingService>();
 builder.Services.AddScoped<ITimeslotService, TimeslotService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
@@ -58,6 +59,7 @@ if (!string.IsNullOrEmpty(httpUrl))
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     //This will generate a OpenAPI yaml document 
     //when the application is run in DEV mode
     app.MapOpenApi("/openapi/{documentName}.yaml");
@@ -65,7 +67,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
     {
-        options.RoutePrefix = string.Empty;
+        //[DISABLED], Because after the CORS implementation
+        //Because this would result in an error which wouldn't make it possible to display
+        //the generated swagger file
+        // options.RoutePrefix = string.Empty;
     });
 }
 

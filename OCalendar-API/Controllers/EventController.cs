@@ -28,18 +28,18 @@ public class EventController : ControllerBase
         return Ok(foundEvent);
     }
 
-    [HttpGet("month")]
-    public ActionResult<IEnumerable<Event>> GetByMonth()
+    [HttpGet("current")]
+    public ActionResult<IEnumerable<Event>> GetByCurrentMonthYear()
     {
-        IEnumerable<Event>? foundEvents = _eventService.GetByMonth();
+        IEnumerable<Event>? foundEvents = _eventService.GetByMonthAndYear();
         if (foundEvents == null) return NotFound();
         return Ok(foundEvents);
     }
 
-    [HttpGet("month/{month:int}")]
-    public ActionResult<IEnumerable<Event>> GetByMonth(int month)
+    [HttpGet("{year:int}/{month:int}")]
+    public ActionResult<IEnumerable<Event>> GetByMonth(int year, int month)
     {
-        IEnumerable<Event>? foundEvents = _eventService.GetByMonth(month);
+        IEnumerable<Event>? foundEvents = _eventService.GetByMonthAndYear(month, year);
         if (foundEvents == null) return NotFound();
         return Ok(foundEvents);
     }

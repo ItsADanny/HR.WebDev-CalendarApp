@@ -3,6 +3,7 @@ public interface IEventAttendanceService
     IEnumerable<EventAttendance> GetByEvent(int eventID);
     EventAttendance? GetByID(int id);
     IEnumerable<EventAttendance> GetByUser(int userID);
+    IEnumerable<EventAttendance> GetByMonthForUser(int year, int month, int userID);
     EventAttendance Create(EventAttendingDto eventAttendingDto);
     EventAttendance? Update(int id, EventAttendingDto eventAttendingDto);
 }
@@ -39,6 +40,20 @@ public class EventAttendanceService : IEventAttendanceService
     }
 
     public IEnumerable<EventAttendance> GetByEvent(int eventID) => _eventAttendanceRepo.GetBy(ea => ea.Event == _eventRepo.GetByID(eventID));
+
+    public IEnumerable<EventAttendance> GetByMonthForUser(int year, int month, int userID) {
+        DateTime searchDateTime = new DateTime(year, month, 1);
+        IEnumerable<Event> foundEvents = _eventRepo.GetBy(e => e.fromDateTime == searchDateTime);
+
+        IEnumerable<EventAttendance> foundEventAttendances = [];
+        foreach (Event foundEvent in foundEvents)
+        {
+            IEnumerable<EventAttendance> results = _eventAttendanceRepo.GetBy(ea => ea.Event == _eventRepo.GetBy(e => e.fromDateTime == searchDateTime) && ea.UserId == userID);
+            foundEventAttendances = foundEventAttendances.Concat(results);
+        }
+
+        return foundEventAttendances;
+    }
 
     public EventAttendance? GetByID(int id) => _eventAttendanceRepo.GetByID(id);
 

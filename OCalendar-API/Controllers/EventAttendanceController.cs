@@ -30,6 +30,14 @@ public class EventAttendanceController : ControllerBase
         return Ok(foundEventAttendances);
     }
 
+    [HttpGet("month/{year:int}/{month:int}/{userID:int}")]
+    public ActionResult<IEnumerable<EventAttendance>> GetByEventMonthForUser(int year, int month, int userID)
+    {
+        IEnumerable<EventAttendance>? foundEventAttendances = _eventAttendanceService.GetByMonthForUser(year, month, userID);
+        if (foundEventAttendances == null) return NotFound();
+        return Ok(foundEventAttendances);
+    }
+
     [HttpGet("user/{userID:int}")]
     public ActionResult<IEnumerable<EventAttendance>> GetByUser(int userID)
     {
