@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function RegisterForm() {
-  const [email, setEmail] = useState("");       // ← change from username to email
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -12,7 +12,7 @@ function RegisterForm() {
     setMessage("");
 
     try {
-      const response = await fetch("http://localhost:5050/api/register", {
+      const response = await fetch("http://localhost:5050/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, firstName, lastName })  // <-- send email

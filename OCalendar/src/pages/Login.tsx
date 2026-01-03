@@ -3,7 +3,6 @@ import '../stylesheets/Login.css'
 
 import { useState }  from 'react'
 import { useNavigate } from 'react-router-dom'
-import authService from '../services/authService';
 
 function Login() {
     const navigate = useNavigate();
@@ -16,12 +15,12 @@ function Login() {
         e.preventDefault();
         setError('');
 
-        try {
-            await authService.login(username, password);
-            navigate("/home", {replace: true});
-        } catch (err: any) {
-            setError(err.message);
-        }
+        // try {
+        //     await authService.login(username, password);
+        //     navigate("/home", {replace: true});
+        // } catch (err: any) {
+        //     setError(err.message);
+        // }
     };
     return (
         <div className="login-container">

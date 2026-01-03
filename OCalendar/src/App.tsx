@@ -9,15 +9,6 @@ import BookaRoom from './pages/BookaRoom.tsx'
 import UpdateRoom from './pages/UpdateRoom.tsx'
 import Register from './pages/Register.tsx'
 import BookaNewRoom from './pages/BookaNewRoom.tsx'
-import authService from './services/authService.ts';
-
-
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  if (!authService.isAuthenticated()) {
-    return <Navigate to="/login" replace />;
-  }
-  return children;
-}
 
 
 function App() {
@@ -31,9 +22,7 @@ function App() {
         <Route 
           path="/calendar" 
           element={
-            <ProtectedRoute>
-              <Calendar />
-            </ProtectedRoute>
+            <Calendar />
           } 
         />
         <Route path="/attending" element={<Attending />} />
@@ -44,7 +33,7 @@ function App() {
 
         <Route path="*" element={<h1>404: Page Does not exist</h1>} />
       </Routes>
-      { authService.isAuthenticated() ? <NavbarLoggedIn /> : null }
+      <NavbarLoggedIn />
     </>
   )
 }
