@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
+[ServiceFilter(typeof(LoginFilter))]
+[TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageUsers })]
 public class RoleController : ControllerBase
 {
     private readonly IRoleService _roleService;

@@ -42,6 +42,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// Add the login filter as a service
+builder.Services.AddScoped<LoginFilter>();
+
 var app = builder.Build();
 
 // Use CORS

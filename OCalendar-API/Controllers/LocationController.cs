@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
+[ServiceFilter(typeof(LoginFilter))]
 public class LocationController : ControllerBase
 {
     private readonly ILocationService _locationService;
@@ -68,6 +69,7 @@ public class LocationController : ControllerBase
     // ====================================================================================
     // POST
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageRooms })]
     [HttpPost("")]
     public ActionResult<Location> Create([FromBody] LocationDto l)
     {
@@ -77,6 +79,7 @@ public class LocationController : ControllerBase
     // ====================================================================================
     // PUT
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageRooms })]
     [HttpPut("{id:int}")]
     public ActionResult<Location> Update(int id, [FromBody] LocationDto l)
     {
@@ -87,6 +90,7 @@ public class LocationController : ControllerBase
     // ====================================================================================
     // DELETE
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageRooms })]
     [HttpDelete("{id:int}")]
     public ActionResult<Location> Delete(int id) => _locationService.Delete(id) ? NotFound() : Ok();
 

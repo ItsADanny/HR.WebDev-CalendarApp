@@ -14,6 +14,7 @@ public class UserController : ControllerBase
     // ====================================================================================
     // GET
     // ====================================================================================
+    [ServiceFilter(typeof(LoginFilter))]
     [HttpGet("")]
     public ActionResult<IEnumerable<User>> GetAll() {
         IEnumerable<User>? foundUsers = _userService.GetAll();
@@ -26,6 +27,7 @@ public class UserController : ControllerBase
         return Ok(foundUsers);
     }
 
+    [ServiceFilter(typeof(LoginFilter))]
     [HttpGet("{id:int}")]
     public ActionResult<User> GetByID(int id)
     {
@@ -38,6 +40,7 @@ public class UserController : ControllerBase
         return Ok(foundUser);
     }
 
+    [ServiceFilter(typeof(LoginFilter))]
     [HttpGet("role/{roleId:int}")]
     public ActionResult<IEnumerable<User>> GetByMonth(int roleId)
     {
@@ -53,6 +56,7 @@ public class UserController : ControllerBase
         return Ok(foundUsers);
     }
 
+    [ServiceFilter(typeof(LoginFilter))]
     [HttpGet("email/{email:alpha}")]
     public ActionResult<IEnumerable<User>> GetByMonth(string email)
     {
@@ -68,6 +72,7 @@ public class UserController : ControllerBase
         return Ok(foundUsers);
     }
 
+    [ServiceFilter(typeof(LoginFilter))]
     [HttpGet("firstname/{firstname:alpha}")]
     public ActionResult<IEnumerable<User>> GetByFirstname(string firstname)
     {
@@ -83,6 +88,7 @@ public class UserController : ControllerBase
         return Ok(foundUsers);
     }
 
+    [ServiceFilter(typeof(LoginFilter))]
     [HttpGet("lastname/{lastname:alpha}")]
     public ActionResult<IEnumerable<User>> GetByLastname(string lastname)
     {
@@ -116,6 +122,7 @@ public class UserController : ControllerBase
     // ====================================================================================
     // PUT
     // ====================================================================================
+    [ServiceFilter(typeof(LoginFilter))]
     [HttpPut("{id:int}")]
     public ActionResult<Event> Update(int id, [FromBody] UserDto u)
     {
@@ -126,6 +133,8 @@ public class UserController : ControllerBase
     // ====================================================================================
     // DELETE
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageUsers })]
+    [ServiceFilter(typeof(LoginFilter))]
     [HttpDelete("{id:int}")]
     public ActionResult<Event> Delete(int id) => _userService.Delete(id) ? NotFound() : Ok();
 }

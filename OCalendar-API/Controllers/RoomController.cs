@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
+[ServiceFilter(typeof(LoginFilter))]
 public class RoomController : ControllerBase
 {
     private readonly IRoomService _roomService;
@@ -95,6 +96,7 @@ public class RoomController : ControllerBase
     // ====================================================================================
     // POST
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageRooms })]
     [HttpPost("")]
     public ActionResult<Room> Create([FromBody] RoomDto R)
     {
@@ -104,6 +106,7 @@ public class RoomController : ControllerBase
     // ====================================================================================
     // PUT
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageRooms })]
     [HttpPut("{id:int}")]
     public ActionResult<Room> Update(int id, [FromBody] RoomDto R)
     {
@@ -114,6 +117,7 @@ public class RoomController : ControllerBase
     // ====================================================================================
     // DELETE
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageRooms })]
     [HttpDelete("{id:int}")]
     public ActionResult<Room> Delete(int id) => _roomService.Delete(id) ? NotFound() : Ok();
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
+[ServiceFilter(typeof(LoginFilter))]
 public class EventController : ControllerBase
 {
     private readonly IEventService _eventService;
@@ -47,6 +48,7 @@ public class EventController : ControllerBase
     // ====================================================================================
     // POST
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageEvents })]
     [HttpPost("")]
     public ActionResult<Event> Create([FromBody] EventDto e)
     {
@@ -56,6 +58,7 @@ public class EventController : ControllerBase
     // ====================================================================================
     // PUT
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageEvents })]
     [HttpPut("{id:int}")]
     public ActionResult<Event> Update(int id, [FromBody] EventDto e)
     {
@@ -66,6 +69,7 @@ public class EventController : ControllerBase
     // ====================================================================================
     // DELETE
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageEvents })]
     [HttpDelete("{id:int}")]
     public ActionResult<Event> Delete(int id) => _eventService.Delete(id) ? NotFound() : Ok();
 }

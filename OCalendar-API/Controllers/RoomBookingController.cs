@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
+[ServiceFilter(typeof(LoginFilter))]
 public class RoomBookingController : ControllerBase
 {
     private readonly IRoomBookingService _RoomBookingService;

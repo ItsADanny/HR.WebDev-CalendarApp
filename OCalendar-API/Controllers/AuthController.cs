@@ -15,8 +15,8 @@ public class AuthController : ControllerBase
     // GET
     // ====================================================================================
     [HttpGet("Exist")]
-    public ActionResult<UserSession> DoesExist([FromHeader(Name = "authorization")] string authorization) {
-        UserSession? foundSession = _authService.SessionExists(authorization);
+    public ActionResult<UserSession> DoesExist([FromHeader(Name = "Authorization")] string Authorization) {
+        UserSession? foundSession = _authService.SessionExists(Authorization);
         if (foundSession is not null) return Ok(foundSession);
         return NotFound();
     }
@@ -36,9 +36,9 @@ public class AuthController : ControllerBase
     // PUT
     // ====================================================================================
     [HttpPut("Logout")]
-    public ActionResult<UserSession> Logout([FromHeader(Name = "authorization")] string authorization) {
-        UserSession? foundSession = _authService.SessionExists(authorization);
-        if (foundSession is not null) return Ok(_authService.Logout(authorization));
+    public ActionResult<UserSession> Logout([FromHeader(Name = "Authorization")] string Authorization) {
+        UserSession? foundSession = _authService.SessionExists(Authorization);
+        if (foundSession is not null) return Ok(_authService.Logout(Authorization));
         return NotFound();
     }
 }

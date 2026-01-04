@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
+[ServiceFilter(typeof(LoginFilter))]
 public class EventAttendanceController : ControllerBase
 {
     private readonly IEventAttendanceService _eventAttendanceService;
