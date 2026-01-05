@@ -32,13 +32,17 @@ function CreateNewEvent({ onEventCreated }: { onEventCreated: (event: any) => vo
                 body: JSON.stringify({
                     title: form.title,
                     description: form.description,
-                    fromDateTime: form.fromDateTime ? `${form.fromDateTime}` : "",
-                    untilDateTime: form.untilDateTime ? `${form.untilDateTime}` : ""
+                    roomBookingID: null,
+                    startDateTime: form.fromDateTime + ":00",
+                    endDateTime: form.untilDateTime + ":00",
+                    userID: Number(localStorage.getItem("userId"))
                 })
             });
 
-            const eventData = await response.json();
+            
             if (!response.ok) throw new Error("Failed to create event");
+
+            const eventData = await response.json();
 
             onEventCreated(eventData);
             setForm({ title: "", description: "", fromDateTime: "", untilDateTime: "",  });

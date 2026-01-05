@@ -71,5 +71,5 @@ public class EventController : ControllerBase
     // ====================================================================================
     [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageEvents })]
     [HttpDelete("{id:int}")]
-    public ActionResult<Event> Delete(int id) => _eventService.Delete(id) ? NotFound() : Ok();
+    public ActionResult<Event> Delete(int id) => _eventService.Delete(id) ? Ok() : NotFound();
 }

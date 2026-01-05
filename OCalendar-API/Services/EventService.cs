@@ -2,6 +2,8 @@ public interface IEventService
 {
     IEnumerable<Event> GetAll();
     Event? GetByID(int id);
+
+    Event? GetByTitle(string title);
     IEnumerable<Event> GetByMonthAndYear();
     IEnumerable<Event> GetByMonthAndYear(int month, int year);
     Event Create(EventDto eventDto);
@@ -60,6 +62,8 @@ public class EventService : IEventService
     public IEnumerable<Event> GetAll() => _eventRepo.ReadAll();
 
     public Event? GetByID(int id) => _eventRepo.GetByID(id);
+
+    public Event? GetByTitle(string title) => _eventRepo.GetBy(p => p.Title == title).FirstOrDefault();
 
     public IEnumerable<Event> GetByMonthAndYear() => _eventRepo.GetBy(p => p.fromDateTime.Month == DateTime.Now.Month && p.fromDateTime.Year == DateTime.Now.Year);
     public IEnumerable<Event> GetByMonthAndYear(int month, int year) => _eventRepo.GetBy(p => p.fromDateTime.Month == month && p.fromDateTime.Year == year);
