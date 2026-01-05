@@ -1,0 +1,19 @@
+.room-comment-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px; /* Space between HeaderCard and RoomInfoCard */
+    background-color: lightgray;
+    flex: 2;
+    align-self: center;
+    width: 95%;
+    align-items: start;
+    margin-bottom: 10px;
+    overflow-y: auto;
+}
+
+.room-comment-card textarea {
+    width: 100%;
+}

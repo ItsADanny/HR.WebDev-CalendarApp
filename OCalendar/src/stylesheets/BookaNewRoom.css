@@ -1,0 +1,65 @@
+.new-room-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.new-room-card label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.new-room-card select,
+.new-room-card input[type="date"],
+.new-room-card input[type="time"] {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.new-room-card select:focus,
+.new-room-card input[type="date"]:focus,
+.new-room-card input[type="time"]:focus {
+    outline: none;
+    border-color: #0078d4;
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+}
+
+.new-room-card button {
+    padding: 0.75rem 1.5rem;
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.new-room-card button:hover {
+    background-color: #106ebe;
+}
+
+.new-room-card p {
+    padding: 0.75rem;
+    margin: 0;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.new-room-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-room-card form {
+    width: 100%;
+    max-width: 500px;
+}

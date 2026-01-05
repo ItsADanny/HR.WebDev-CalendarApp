@@ -1,0 +1,327 @@
+/* My wrapper box */
+.Attending__white-box {
+    position: fixed;
+    width: 65vw;
+    height: 65vh;
+    top: 6vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--OrangeCompany_CardWhite);
+    color: var(--OrangeCompany_OffBlack);
+    border-radius: 25px;
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+/* Inside the white box (left box)*/
+.Attending__white-box-inside {
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 25px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.12);
+    padding: 24px;
+    gap: 12px;
+    flex: 2;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Event list (right box) */
+.Attending__event-list {
+    flex: 1;
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 0;
+}
+
+.Attending__event-item-container,
+.Attending__not-attending-section {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Individual event items in right box */
+.Attending__event-item {
+    background: var(--OrangeCompany_LightOrange);
+    color: #ffffff;
+    border-radius: 9999px; /* I was lazy */
+    padding: 12px 12px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.Attending__event-item:hover,
+.Attending__event-item:focus {
+    background: var(--OrangeCompany_Orange);
+}
+
+.Attending__event-title-underline,
+.Attending__title-underline {
+    width: 100%;
+    height: 2px;
+    background: #111;
+    /* border-radius: 1px; */ /* rounded edges */
+    margin-bottom: 6px; /* Space under the underline */
+}
+
+.Attending__attending-btn {
+    background: green; /* NEEDS TO BE SWITCHED ON AND OFF IF YOU GO? */
+    color: #fff;
+    border-radius: 9999px;
+    padding: 10px 50px; /* Puffing the button */
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 18px;
+}
+
+.Attending__attending-btn .notGoing {
+    background: red; /* NEEDS TO BE SWITCHED ON AND OFF IF YOU GO? */
+}
+
+.Attending__attending-btn:hover {
+    background: var(--OrangeCompany_Orange, #fb8c00);
+}
+
+.Attending__inner-container-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    height: 100%;
+    min-height: 0;
+}
+
+/* Header Card */
+.header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    flex-shrink: 0;
+    min-height: 0;
+    height: auto;
+}
+
+.header-card h1 {
+    margin: 0;
+    font-size: 2rem;
+    flex: 1;
+}
+
+.status-indicator {
+    cursor: pointer;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-indicator.past {
+    background: #999;
+    color: #fff;
+}
+
+.status-indicator.going {
+    background: #4CAF50;
+    color: #fff;
+}
+
+.status-indicator.notGoing {
+    background: #f44336;
+    color: #fff;
+}
+
+.Attending__grey-top {
+    flex: 6;
+    background: var(--OrangeCompany_GreyBox_LightMode);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.08);
+    min-height: 0;
+}
+
+.Attending__grey-bottom {
+    flex: 4;
+    background: var(--OrangeCompany_GreyBox_LightMode);
+    border-radius: 25px;
+    padding: 24px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.08);
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Event Comment Card */
+.event-comment-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-height: 200px;
+    gap: 12px;
+    padding: 0rem 1.2rem 1.2rem;
+}
+
+.comments-section {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    border: #111 1px solid;
+    background-color: var(--OrangeCompany_OffWhite);
+    border-radius: 12px;
+}
+
+.event-comment-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.comments-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.comment-line {
+    display: flex;
+    gap: 6px;
+    word-break: break-word;
+    line-height: 1.4;
+    padding: 0 8px;
+}
+
+.comment-line strong {
+    flex-shrink: 0;
+}
+
+.comment-line span {
+    flex: 1;
+}
+
+.no-comments {
+    color: #888;
+    font-style: italic;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.add-comment-section {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.comment-textarea {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--OrangeCompany_CardBlack);
+    background-color: var(--OrangeCompany_OffWhite);
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: none;
+    border-radius: 12px;
+}
+
+.comment-textarea:focus {
+    outline: none;
+    border-color: var(--OrangeCompany_BrandOrange);
+}
+
+.comment-submit-btn {
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.comment-submit-btn:hover {
+    background: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+    .Attending__white-box {
+        background: var(--OrangeCompany_CardBlack);
+        color: var(--OrangeCompany_OffWhite);
+        box-shadow: 0 10px 20px rgb(243, 121, 35);
+    }
+
+    /* Inside the white box (left box)*/
+    .Attending__white-box-inside {
+        background: var(--OrangeCompany_CardBlack);
+        box-shadow: 0 10px 20px rgb(243, 121, 35);
+    }
+
+    /* Event list (right box) */
+    .Attending__event-list {
+        background: var(--OrangeCompany_CardBlack);
+    }
+
+    .Attending__event-title-underline,
+    .Attending__title-underline {
+        background: var(--OrangeCompany_OffWhite);
+    }
+
+    .Attending__grey-top {
+        background: var(--OrangeCompany_CardBlack_Box);
+    }
+
+    .Attending__grey-bottom {
+        background: var(--OrangeCompany_CardBlack_Box);
+    }
+
+    .Attending__event-item {
+        background: var(--OrangeCompany_BrandOrange);
+    }
+
+    .Attending__event-item:hover,
+    .Attending__event-item:focus {
+        background: var(--OrangeCompany_DarkOrange);
+    }
+
+    .comments-section {
+        background-color: var(--OrangeCompany_CardBlack_Box);
+        border: 1px solid var(--OrangeCompany_BrandOrange);
+        color :white;
+    }
+
+    .comment-textarea {
+        background-color: var(--OrangeCompany_CardBlack_Box);
+        border: 1px solid var(--OrangeCompany_BrandOrange);
+        color: var(--OrangeCompany_OffWhite);
+    }
+
+    .comment-textarea:focus {
+        box-shadow: 0 2px 10px rgb(243, 121, 35);
+    }
+
+    .comment-submit-btn {
+        background: var(--OrangeCompany_BrandOrange);
+        color: var(--OrangeCompany_OffBlack);
+    }
+
+    .comment-submit-btn:hover {
+        background: var(--OrangeCompany_Orange);
+    }
+}

@@ -1,0 +1,23 @@
+.room-info-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px; /* Space between HeaderCard and RoomInfoCard */
+    background-color: var(--OrangeCompany_OffWhite);
+    flex: 3;
+    align-self: center;
+    width: 95%;
+    align-items: start;
+    overflow-y: auto;
+    flex-shrink: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .room-info-card {
+        background-color: var(--OrangeCompany_CardBlack);
+        color: var(--OrangeCompany_OffWhite);
+        border: 1px solid var(--OrangeCompany_Orange);
+    }
+}

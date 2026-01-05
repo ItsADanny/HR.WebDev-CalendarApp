@@ -1,0 +1,26 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+:root {
+    /* Generic colors */
+    --OrangeCompany_BrandOrange: #F37923;     /* RGB Code: 243 121 35  */
+    --OrangeCompany_Orange: #FE7743;          /* RGB Code: 254 119 67  */
+    --OrangeCompany_LightOrange: #FEA07B;     /* RGB Code: 254 160 123 */
+    --OrangeCompany_DarkOrange: #D35E0C;      /* RGB Code: 211 94  12  */
+
+    /* Light mode colors */
+    --OrangeCompany_OffWhite: #EFEEEA;        /* RGB Code: 239 238 234 */
+    --OrangeCompany_CardWhite: #FBFBFA;       /* RGB Code: 251 251 250 */
+    --OrangeCompany_GreyBox_LightMode: #8f8f8f;
+
+    /* Dark mode colors */
+    --OrangeCompany_OffBlack: #1C1C1C;        /* RGB Code:  28  28  28 */
+    --OrangeCompany_CardBlack: #353535;       /* RGB Code:  53  53  53 */
+    --OrangeCompany_CardBlack_Box: #4c4c4c;   /* RGB Code:  76  76  76 */
+
+    /*Colours can be called with: var([COLOUR NAME])*/
+}

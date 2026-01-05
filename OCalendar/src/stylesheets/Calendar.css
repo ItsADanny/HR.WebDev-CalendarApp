@@ -1,0 +1,352 @@
+:root {
+    /* Generic colors */
+    --OrangeCompany_BrandOrange: #F37923;     /* RGB Code: 243 121 35  */
+    --OrangeCompany_Orange: #FE7743;          /* RGB Code: 254 119 67  */
+    --OrangeCompany_LightOrange: #FEA07B;     /* RGB Code: 254 160 123 */
+    --OrangeCompany_DarkOrange: #D35E0C;      /* RGB Code: 211 94  12  */
+
+    /* Light mode colors */
+    --OrangeCompany_OffWhite: #EFEEEA;        /* RGB Code: 239 238 234 */
+    --OrangeCompany_CardWhite: #FBFBFA;       /* RGB Code: 251 251 250 */
+    --OrangeCompany_GreyBox_LightMode: #8f8f8f;
+
+    /* Dark mode colors */
+    --OrangeCompany_OffBlack: #1C1C1C;        /* RGB Code:  28  28  28 */
+    --OrangeCompany_CardBlack: #353535;       /* RGB Code:  53  53  53 */
+
+    /*Colours can be called with: var([COLOUR NAME])*/
+}
+
+/* My wrapper box */
+.Calendar__white-box {
+    position: fixed;
+    width: 65vw;
+    height: 65vh;
+    top: 6vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--OrangeCompany_CardWhite);
+    color: var(--OrangeCompany_OffBlack);
+    border-radius: 25px;
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+/* Inside the white box (left box)*/
+.Calendar__white-box-inside {
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 25px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.12);
+    padding: 24px;
+    gap: 12px;
+    flex: 2;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Event list (right box) */
+.Calendar__event-list {
+    flex: 1;
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Individual event items in right box */
+.Calendar__event-item {
+    background: var(--OrangeCompany_LightOrange);
+    color: #ffffff;
+    border-radius: 9999px; /* I was lazy */
+    padding: 12px 24px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.Calendar__event-item:hover,
+.Calendar__event-item:focus {
+    background: var(--OrangeCompany_Orange);
+}
+
+.Calendar__event-title-underline,
+.Calendar__title-underline {
+    width: 100%;
+    height: 2px;
+    background: #111;
+    /* border-radius: 1px; */ /* rounded edges */
+    margin-bottom: 6px; /* Space under the underline */
+}
+
+.Calendar__white-box-inside h3 {
+    text-align: start;
+}
+
+/* the actual calendar */
+/* ======================================================================= */
+/* .calendar {
+    width: 100%;
+    height: 100%;
+} */
+
+.calendar {
+    width: 100%;
+    flex: 1;
+    min-height: 0; /* VERY important */
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-navigation {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    width: 100%;
+}
+
+.calendar-navigation h2 {
+    justify-self: center;
+    text-align: center;
+    font-size: clamp(1.5rem, 1.5 cqi, 2.5rem);
+
+    will-change: transform, opacity;
+}
+
+.calendar-navigation h2 .Next {
+    animation: slideToTheRight 250ms ease-out;
+}
+
+.calendar-navigation h2 .Prev {
+    animation: slideToTheLeft 250ms ease-out;
+}
+
+.calendar-navigation .calendar-navigation-buttons-back {
+    justify-self: start;
+}
+
+.calendar-navigation .calendar-navigation-buttons-forward {
+    justify-self: end;
+}
+
+@keyframes slideToTheRight {
+    from {
+        opacity: 0;
+        transform: translateX(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideToTheLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.calendar .calendar-weekdays {
+    width: 100%;
+    display: flex;
+    margin: 0.5rem 0;
+}
+
+.calendar .calendar-days {
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 0.25rem;
+}
+
+.calendar .calendar-days > div {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.calendar .calendar-weekdays span {
+    width: calc(100% / 7);
+    font-size: clamp(1rem, 0.8cqi, 1.3rem);
+    font-weight: bold;
+}
+
+/* .calendar .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    width: 100%;
+    height: 100%;
+    gap: 0.25rem;
+    box-sizing: border-box;
+} */
+
+.calendar .calendar-days span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: clamp(1rem, 0.8cqi, 1.3rem);
+    aspect-ratio: 1;
+
+    min-width: 0;
+    min-height: 0;
+}
+
+.calendar .calendar-days .calendar-days-prev {
+    opacity: 0.5;
+}
+
+.calendar .calendar-days .calendar-days-current {
+    color: var(--OrangeCompany_BrandOrange);
+    font-weight: bold;
+}
+
+/* .calendar .calendar-days {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calendar .calendar-days span {
+    width: calc(100% / 7);
+    height: 7.5%;
+    font-size: clamp(1rem, 0.8cqi, 1.3rem);
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar .calendar-days .calendar-days-prev {
+    opacity: 0.5;
+}
+
+.calendar .calendar-days .calendar-days-current {
+    background-color: var(--OrangeCompany_BrandOrange);
+    border-radius: 33px;
+    box-shadow: 0 0 1rem 0.2rem var(--OrangeCompany_BrandOrange);
+} */
+
+/* ======================================================================= */
+
+.calendar-item {
+    background: var(--OrangeCompany_LightOrange);
+    color: #ffffff;
+    border-radius: 9999px;
+    padding: 4px 2px;
+    cursor: pointer;
+    font-size: clamp(1rem, 0.8cqi, 1.3rem);
+}
+
+.calendar-item.past {
+    background: gray !important;
+}
+
+.calendar-item.going {
+    background: green !important;
+}
+
+.calendar-item.notGoing {
+    background: red !important;
+}
+
+.calendar-days-eventlist {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.calendar-days-eventlist a {
+    text-decoration: none;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.calendar-days-eventlist .calendar-item {
+    padding: 2px 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.75rem;
+    margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--OrangeCompany_OffBlack);
+    }
+
+    .menu-bar {
+        background-color: var(--OrangeCompany_CardBlack);
+        box-shadow: 0 10px 20px rgb(243, 121, 35);
+    }
+
+    .menu-bar a {
+        background: var(--OrangeCompany_BrandOrange);
+    }
+
+    .menu-bar a:hover {
+        background: var(--OrangeCompany_DarkOrange);
+        outline: none;
+    }
+    .menu-bar a:focus {
+        background: var(--OrangeCompany_DarkOrange);
+        outline: none;
+    }
+
+    .menu-bar a.active {
+        background: var(--OrangeCompany_DarkOrange);
+    }
+
+    .event-item {
+        background-color: var(--OrangeCompany_BrandOrange);
+    }
+
+    .event-item:hover,
+    .event-item:focus {
+        background: var(--OrangeCompany_DarkOrange);
+    }
+
+    .Calendar__white-box {
+        box-shadow: 0 10px 20px rgb(243, 121, 35);
+    }
+
+    .Calendar__white-box, .Calendar__white-box-inside, .Calendar__event-list, .attending-list, .Book-a-room-list {
+        background: var(--OrangeCompany_CardBlack);
+        color: var(--OrangeCompany_OffWhite);
+    }
+
+    .Calendar__event-title-underline,
+    .Calendar__title-underline {
+        background: var(--OrangeCompany_OffWhite);
+    }
+
+    .Calendar__event-item {
+        background: var(--OrangeCompany_BrandOrange);
+    }
+
+    .Calendar__event-item:hover,
+    .Calendar__event-item:focus {
+        background: var(--OrangeCompany_DarkOrange);
+    }
+}

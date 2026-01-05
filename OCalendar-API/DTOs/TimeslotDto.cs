@@ -1,0 +1,1 @@
+public record TimeslotDto(int roomID, string name, TimeOnly startTime, TimeOnly endTime, DateOnly date, int userID);

@@ -1,0 +1,52 @@
+/* white menu bar above the bottom */
+.menu-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 50px;
+    transform: translateX(-50%);
+    background: var(--OrangeCompany_CardWhite);
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1.5px 4px rgba(0,0,0,0.06);
+    display: flex;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    gap: 20px; /* space between buttons */
+    padding: 6px;
+    z-index: 1000;
+    align-items: center;
+}
+
+/* Style the menu links */
+.menu-bar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--OrangeCompany_LightOrange);
+    color: #222;
+    text-decoration: none;
+    padding: 20px 48px;
+    border-radius: 15px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    border: none;
+    min-width: 220px;
+    min-height: 80px;
+    letter-spacing: 0.01em;
+}
+
+.menu-bar a:hover {
+    background: var(--OrangeCompany_Orange);
+    outline: none;
+}
+.menu-bar a:focus {
+    background: var(--OrangeCompany_DarkOrange);
+    outline: none;
+}
+
+/* 'active' class for the current page's button */
+.menu-bar a.active {
+    background: var(--OrangeCompany_BrandOrange);
+    color: #222;
+    font-weight: 600;
+    box-shadow: 0 4px 24px rgba(255,183,77,0.18);
+}
