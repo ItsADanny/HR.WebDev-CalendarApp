@@ -7,31 +7,33 @@ function NewBookingForm() {
 
     
     const [form, setForm] = useState({
-        location: "",
-        roomName: "",
+        roomId: "",
         date: "",
         timeSlot: ""
     });
 
     useEffect(() => {
-        fetch("http://localhost:5050/Room")
+        fetch("http://localhost:5050/Room", {
+            method: "GET",
+            headers: { "Content-Type": "application/json", Authorization: `${localStorage.getItem('token')}` }
+        })
         .then(res => res.json())
         .then(data => setRooms(data))
         .catch(() => setMessage("Failed to load rooms"));
     }, []);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        alert(`Room ${form.roomName} at ${form.location} booked for ${form.date} at ${form.timeSlot}`);
+        alert(`Room ${form.roomId} booked for ${form.date} at ${form.timeSlot}`);
 
         try {
             const response = await fetch("http://localhost:5050/RoomBooking", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", Authorization: `${localStorage.getItem('token')}` },
                 body: JSON.stringify(form)
             });
 
@@ -44,8 +46,7 @@ function NewBookingForm() {
 
             console.log("Room booked successfully:", data.message);
             setForm({
-                location: "",
-                roomName: "",
+                roomId: "",
                 date: "",
                 timeSlot: ""
             });
@@ -60,7 +61,7 @@ function NewBookingForm() {
                 Room
                 <select
                 name="roomId"
-                value={form.roomName}
+                value={form.roomId}
                 onChange={handleChange}
                 required
                 >
@@ -68,7 +69,7 @@ function NewBookingForm() {
 
                 {rooms.map(room => (
                     <option key={room.id} value={room.id}>
-                    {room.location} - Room {room.name}
+                        {room.location} - {room.name}
                     </option>
                 ))}
                 </select>

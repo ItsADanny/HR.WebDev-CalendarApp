@@ -2,7 +2,7 @@ import "./css/HeaderCard.css";
 import type { BookedRoom } from './bookedroom.type.ts'
 
 function HeaderCard({ booking }: { booking?: BookedRoom }) {
-    const title = booking ? `Room ${booking.room?.name || ''}` : 'Select a Room';
+    const title = booking ? `${booking.room?.name || ''}` : 'Select a Room';
     const status = booking ? "Booked" : "Available";
     return (
         <>
