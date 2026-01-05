@@ -10,6 +10,11 @@ import UpdateRoom from './pages/UpdateRoom.tsx'
 import Register from './pages/Register.tsx'
 import BookaNewRoom from './pages/BookaNewRoom.tsx'
 import type { ReactNode } from 'react'
+import AdminDashboard from './pages/AdminDashboard.tsx'
+import AllEvents from './components/AdminComponents/AllEvents.tsx'
+import CreateNewEvent from './components/AdminComponents/CreateNewEvent.tsx'
+import DeleteEvent from './components/AdminComponents/DeleteEvent.tsx'
+import EditEvent from './components/AdminComponents/EditEvent.tsx'
 
 type ProtectedRouteProps = {
   children: ReactNode
@@ -22,6 +27,7 @@ const ProtectedRoute = (props: ProtectedRouteProps) => {
 }
 
 function App() {
+  
   return (
     <>
       <Routes>
@@ -44,7 +50,15 @@ function App() {
         <Route path="/book-new-room" element={<BookaNewRoom />} />
         <Route path="/update-room" element={<UpdateRoom />} />
 
-        <Route path="/admin-panel" element={<AdminDashboard />} />
+        <Route path="/admin-dashboard" element={
+            <AdminDashboard />
+        } />
+
+        <Route path="/all-events" element={<AllEvents />} />
+        <Route path="/new-event" element={<CreateNewEvent />} />
+        <Route path="/edit-event" element={<EditEvent />} />
+        <Route path="/delete-event" element={<DeleteEvent />} />
+
 
         <Route path="*" element={<h1>404: Page Does not exist</h1>} />
       </Routes>

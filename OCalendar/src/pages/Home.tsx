@@ -14,6 +14,8 @@ function Home() {
           <Link to="/book-a-room">Book a room!</Link>
           <br />
           <Link to="/attending">Attending Page</Link>
+          <br />
+          <Link to="/admin-dashboard">Admin Dashboard</Link>
 
           <HomeTimer />
       </>

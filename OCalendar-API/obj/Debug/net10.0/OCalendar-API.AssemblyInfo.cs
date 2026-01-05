@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OCalendar-API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+99243ea4fee25d3babc8f6079573d370040afb7a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+589e47d2d9e617ea3fdd49d99fbc6e91ddfdbb20")]
 [assembly: System.Reflection.AssemblyProductAttribute("OCalendar-API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OCalendar-API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
