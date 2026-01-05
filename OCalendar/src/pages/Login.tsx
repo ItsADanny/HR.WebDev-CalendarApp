@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 function Login() {
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
@@ -15,13 +15,28 @@ function Login() {
         e.preventDefault();
         setError('');
 
-        // try {
-        //     await authService.login(username, password);
-        //     navigate("/home", {replace: true});
-        // } catch (err: any) {
-        //     setError(err.message);
-        // }
+        try {
+            const response = await fetch("http://localhost:5050/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                setError(data.message || "Login failed");
+                return;
+            }
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userId', data.userId);
+
+            navigate('/calendar');
+        } catch (err: any) {
+            setError(err.message);
+        }
     };
+
     return (
         <div className="login-container">
             <div className="login-box">
@@ -33,10 +48,10 @@ function Login() {
                     <input 
                         className="login-input-field" 
                         type="text" 
-                        placeholder="Username" 
-                        name="username"
-                        value = {username}
-                        onChange = {(e) => setUsername(e.target.value)}
+                        placeholder="Email" 
+                        name="email"
+                        value = {email}
+                        onChange = {(e) => setEmail(e.target.value)}
                         required
                     />
 

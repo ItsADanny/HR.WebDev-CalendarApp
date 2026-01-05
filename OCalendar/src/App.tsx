@@ -9,7 +9,17 @@ import BookaRoom from './pages/BookaRoom.tsx'
 import UpdateRoom from './pages/UpdateRoom.tsx'
 import Register from './pages/Register.tsx'
 import BookaNewRoom from './pages/BookaNewRoom.tsx'
+import type { ReactNode } from 'react'
 
+type ProtectedRouteProps = {
+  children: ReactNode
+}
+
+const ProtectedRoute = (props: ProtectedRouteProps) => {
+  const { children } = props;
+  const isAuthenticated = localStorage.getItem('token')
+  return isAuthenticated ? children : <Navigate to="/login" />
+}
 
 function App() {
   return (
@@ -22,9 +32,12 @@ function App() {
         <Route 
           path="/calendar" 
           element={
-            <Calendar />
+            <ProtectedRoute>
+              <Calendar />
+            </ProtectedRoute>
           } 
         />
+
         <Route path="/attending" element={<Attending />} />
 
         <Route path="/book-a-room" element={<BookaRoom />} />

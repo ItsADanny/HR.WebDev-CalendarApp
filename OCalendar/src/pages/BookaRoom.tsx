@@ -32,8 +32,7 @@ function BookaRoom() {
             </div>
             {/* RIGHT COLUMN */}
             <div className="right-column">
-                <p>Booked Rooms</p>
-                <BookedRooms setSelectedRoom={setSelectedRoom} />
+                <BookedRooms />
                 
                 <div className="buttons-container">
                     <button className="cancel-booking-button" onClick={() => alert('Booking Cancelled!')}>Cancel Booking</button>
