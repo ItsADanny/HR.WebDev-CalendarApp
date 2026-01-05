@@ -13,9 +13,9 @@ export type BookedRoom = {
     bookedByUserId: string;
     createDateTime: string;
     roomId: number;
-    timeSlotId: string;
+    timeslotId: number;
     room?: Room;
-    timeSlot?: TimeSlot;
+    timeslot?: TimeSlot;
 }
 
 export type TimeSlot = {

@@ -44,6 +44,8 @@ function App() {
         <Route path="/book-new-room" element={<BookaNewRoom />} />
         <Route path="/update-room" element={<UpdateRoom />} />
 
+        <Route path="/admin-panel" element={<AdminDashboard />} />
+
         <Route path="*" element={<h1>404: Page Does not exist</h1>} />
       </Routes>
       <NavbarLoggedIn />

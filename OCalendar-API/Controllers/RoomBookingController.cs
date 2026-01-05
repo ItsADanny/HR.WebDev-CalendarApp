@@ -112,5 +112,5 @@ public class RoomBookingController : ControllerBase
     // DELETE
     // ====================================================================================
     [HttpDelete("{id:int}")]
-    public ActionResult<RoomBooking> Delete(int id) => _RoomBookingService.Delete(id) ? NotFound() : Ok();
+    public ActionResult<RoomBooking> Delete(int id) => _RoomBookingService.Delete(id) ? Ok() : NotFound();
 }

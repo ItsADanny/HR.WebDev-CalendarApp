@@ -6,12 +6,14 @@ import RoomCommentCard from "../components/Bookingcomponents/RoomCommentCard.tsx
 import BookedRooms from "../components/Bookingcomponents/BookedRooms.tsx";
 import { useState, useEffect } from "react";
 import type { BookedRoom } from '../components/Bookingcomponents/bookedroom.type.ts'
+import BookaNewRoom from "./BookaNewRoom.tsx";
+import "../stylesheets/BookaNewRoom.css";
 
 function BookaRoom() {
 
     // Currently selected room
     // select no room by default
-    const [selectedRoom, setSelectedRoom] = useState<BookedRoom | undefined>(undefined);
+    const [selectedRoom, setSelectedRoom] = useState<BookedRoom | null>(null);
 
     // Comments
     const [comments, setComments] = useState("");
@@ -48,19 +50,31 @@ function BookaRoom() {
         if (!confirmDelete) return;
 
         try {
+            console.log("point 1");
+
             const response = await fetch(`http://localhost:5050/RoomBooking/${selectedRoom.id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json', 'Authorization':`${localStorage.getItem('token')}` }
             });
-        
+            
+            console.log("point 2, response status: ", response.status);
+
             if (!response.ok) {
                 throw new Error('Failed to cancel booking');
             }
+            console.log("point 3");
+
+            // Refresh booked rooms list
+            setBookedRooms(prevRooms => prevRooms.filter(room => room.id !== selectedRoom.id));
+
+            console.log("point 4");
+
+            setSelectedRoom(null); // Deselect room after cancellation
+
+            console.log("point 5");
 
             alert('Booking cancelled successfully');
-            // Refresh booked rooms list
-            setBookedRooms(bookedRooms.filter(room => room.id !== selectedRoom.id));
-            setSelectedRoom(null); // Deselect room after cancellation
+
         } catch (error) {
             console.error('Error cancelling booking:', error);
             alert('Error cancelling booking. Please try again later.');
@@ -79,7 +93,6 @@ function BookaRoom() {
                     <RoomInfoCard 
                         booking={selectedRoom}
                     />
-                    <RoomCommentCard comments="" onChange={() => {}} />
                 </div>
             </div>
             {/* RIGHT COLUMN */}
@@ -98,7 +111,7 @@ function BookaRoom() {
                         Cancel Booking
                     </button>
                     <NavLink to="/book-new-room" className="book-new-room-link">Book a new Room</NavLink>
-                    <NavLink to="/update-room" className="update-room-link">Update Room</NavLink>
+                    {/* <NavLink to="/update-room" className="update-room-link">Update Room</NavLink> */}
                 </div>
             </div>
         </div>

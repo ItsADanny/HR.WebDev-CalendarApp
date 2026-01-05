@@ -2,16 +2,13 @@ import { NavLink } from "react-router-dom";
 import '../stylesheets/BookaRoom.css';
 import HeaderCard from "../components/Bookingcomponents/HeaderCard.tsx";
 import NewRoomCard from "../components/NewBookingcomp/NewRoomCard.tsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import BookedRooms from "../components/Bookingcomponents/BookedRooms.tsx";
+import type { BookedRoom } from "../components/Bookingcomponents/bookedroom.type.ts";
+import NewBookingForm from "../components/NewBookingcomp/NewBookingForm.tsx";
+import OrangeLogo from '../assets/Orange.png'
 
 function BookaNewRoom() {
-
-    // Currently selected room
-    // select no room by default
-    const [selectedRoom, setSelectedRoom] = useState(null);
-
-    // Comments
-    const [comments, setComments] = useState("");
 
     return (
     <>
@@ -19,17 +16,24 @@ function BookaNewRoom() {
         <div className="booking-container">
             {/* LEFT COLUMN */}
             <div className="left-column">
-                <HeaderCard />
+                <h1>Book a new Room!</h1>
                 <div className="cards-container">
-                    <NewRoomCard />
+                    <NewBookingForm 
+                        onBookingCreated={(newBooking: BookedRoom) => {
+                            alert(`Booking created successfully for room ID: ${newBooking.roomId}`);
+                        }}
+                    />
                 </div>
             </div>
+
             {/* RIGHT COLUMN */}
             <div className="right-column">
-                <p>Booked Rooms</p>
+                <div className="login-logo">
+                    <img src={OrangeLogo} alt="Orange brand logo" />
+                </div>
+                
                 
                 <div className="buttons-container">
-                    <button className="confirm-booking-button" onClick={() => alert('Booking Confirmed!')}>Confirm Booking</button>
                     <NavLink to="/book-a-room">Back to Book a Room</NavLink>
                     
                 </div>

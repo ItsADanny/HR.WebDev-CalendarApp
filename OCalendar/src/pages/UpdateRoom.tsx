@@ -1,59 +1,64 @@
 import { NavLink } from "react-router-dom";
 import '../stylesheets/BookaRoom.css';
 import HeaderCard from "../components/Bookingcomponents/HeaderCard.tsx";
-import NewRoomCard from "../components/NewBookingcomp/NewRoomCard.tsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { BookedRoom } from '../components/Bookingcomponents/bookedroom.type.ts'
+import UpdateBookingForm from "../components/UpdateBooking/UpdateBookingForm.tsx";
+import BookedRooms from "../components/Bookingcomponents/BookedRooms.tsx";
 
 function UpdateRoom() {
-    const [rooms] = useState([
-        {
-        id: 1,
-        title: "Book a Room #1",
-        roomNumber: 12,
-        location: "Kolding",
-        timeSlot: "12:00-13:00",
-        },
-        {
-        id: 2,
-        title: "Book a Room #2",
-        roomNumber: 25,
-        location: "Odense",
-        timeSlot: "14:00-15:00",
-        },
-        {
-        id: 3,
-        title: "Book a Room #3",
-        roomNumber: 30,
-        location: "Aarhus",
-        timeSlot: "16:00-17:00",
-        },
-    ]);
 
     // Currently selected room
     // select no room by default
-    const [selectedRoom, setSelectedRoom] = useState(null);
+    const [selectedRoom, setSelectedRoom] = useState<BookedRoom | null>(null);
+    const [bookedRooms, setBookedRooms] = useState<BookedRoom[]>([]);
 
-    // Comments
-    const [comments, setComments] = useState("");
+    useEffect(() => {
+        async function loadBookedRooms() {
+            try {
+                const isUserId = localStorage.getItem('userId');
+                const response = await fetch(`http://localhost:5050/RoomBooking/user/${isUserId}`, {
+                    method: 'GET',
+                    headers: { 
+                        'Content-Type': 'application/json', 
+                        'Authorization': `${localStorage.getItem('token')}` 
+                    }
+                });
+                const data = await response.json();
+                setBookedRooms(data);
+            } catch(error) {
+                console.log('Failed to load booked rooms: ', error);
+            }
+        }
+        loadBookedRooms();
+    }, []);
 
+    
     return (
     <>
         <div className="booking-container">
             {/* LEFT COLUMN */}
             <div className="left-column">
-                <HeaderCard title="Update Room" status="Available"/>
+                <HeaderCard booking={selectedRoom} />
                 <div className="cards-container">
-                    <NewRoomCard />
+                    <UpdateBookingForm 
+                        selectedRoom={selectedRoom}
+                        onUpdate={(updated) => {
+                            setBookedRooms(prev => prev.map((room) => room.id === updated.id ? updated : room));
+                            setSelectedRoom(updated);
+                        }}
+                    />
                 </div>
             </div>
             {/* RIGHT COLUMN */}
             <div className="right-column">
-                UPDATE
-                <p>Booked Rooms</p>
+                <BookedRooms bookedRooms={bookedRooms} onSelectRoom={setSelectedRoom} />
                 
                 <div className="buttons-container">
-                    <button className="confirm-booking-button" onClick={() => alert('Booking Updated!')}>Confirm Booking</button>
-                    <NavLink to="/book-a-room">Back to Book a Room</NavLink>
+                    <button className="confirm-booking-button" onClick={() => alert('Booking Updated!')}>Update Booking</button>
+                    <NavLink to="/book-a-room">
+                        Back to Book a Room
+                    </NavLink>
                     
                 </div>
             </div>

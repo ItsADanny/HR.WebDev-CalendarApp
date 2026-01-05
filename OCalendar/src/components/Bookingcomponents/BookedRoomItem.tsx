@@ -8,7 +8,7 @@ type Props = {
 
 export default function BookedRoomItem({ bookedroom, onClick }: Props) {
   const roomName = bookedroom.room?.name || 'Unknown Room';
-  const date = new Date(bookedroom.createDateTime).toLocaleDateString();
+  const date = bookedroom.timeslot?.date || 'Unknown Date';
 
   return (
     <>
