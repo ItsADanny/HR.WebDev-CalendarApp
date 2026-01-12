@@ -3,32 +3,57 @@ import "./css/AdminForms.css";
 
 interface Event {
     id: number;
-    title: string;
+    name: string;
     description: string;
     fromDateTime: string;
     untilDateTime: string;
+    roomBookingId: null;
 }
 
-function EditEvent({ event, onEventUpdated }: { event: Event; onEventUpdated: (event: Event) => void }) {
+function EditEvent() {
+    const [events, setEvents] = useState<Event[]>([]);
+    const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
     const [message, setMessage] = useState("");
-
     const [form, setForm] = useState({
-        title: "",
+        name: "",
         description: "",
-        fromDateTime: "",
-        untilDateTime: ""
+        date: "",
+        startTime: "",
+        endTime: ""
     });
 
+    // Fetch all events on mount
     useEffect(() => {
-        if (event) {
+        fetchEvents();
+    }, []);
+
+    const fetchEvents = async () => {
+        try {
+            const response = await fetch("http://localhost:5050/Event", {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`
+                }
+            });
+            const data = await response.json();
+            console.log("Events:", data); // Add this to see what's returned
+            setEvents(data);
+        } catch (err) {
+            console.error("Failed to fetch events:", err);
+        }
+    };
+
+    // Populate form when event is selected
+    useEffect(() => {
+        if (selectedEvent) {
             setForm({
-                title: event.title,
-                description: event.description,
-                fromDateTime: event.fromDateTime,
-                untilDateTime: event.untilDateTime
+                name: selectedEvent.name || "",
+                description: selectedEvent.description || "",
+                date: selectedEvent.date || "",
+                startTime: selectedEvent.startTime ? selectedEvent.startTime.slice(0, 8) : "",
+                endTime: selectedEvent.endTime ? selectedEvent.endTime.slice(0, 8) : ""
             });
         }
-    }, [event]);
+    }, [selectedEvent]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -37,10 +62,11 @@ function EditEvent({ event, onEventUpdated }: { event: Event; onEventUpdated: (e
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!form.title || !form.fromDateTime || !form.untilDateTime) return;
+        if (!selectedEvent || !form.name || !form.date || !form.startTime || !form.endTime) return;
 
         try {
-            const response = await fetch(`http://localhost:5050/Event/${event.id}`, {
+
+            const response = await fetch(`http://localhost:5050/Event/${selectedEvent.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -49,10 +75,11 @@ function EditEvent({ event, onEventUpdated }: { event: Event; onEventUpdated: (e
                 body: JSON.stringify(form)
             });
 
-            const eventData = await response.json();
             if (!response.ok) throw new Error("Failed to update event");
 
-            onEventUpdated(eventData);
+            const updatedEvent = await response.json();
+            setSelectedEvent(updatedEvent);
+            setEvents(events.map(e => e.id === updatedEvent.id ? updatedEvent : e));
             setMessage("Event updated successfully!");
             setTimeout(() => setMessage(""), 3000);
         } catch (err) {
@@ -64,61 +91,99 @@ function EditEvent({ event, onEventUpdated }: { event: Event; onEventUpdated: (e
     return (
         <div className="new-event-card">
             <h1>Edit Event</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Title
-                    <input
-                        type="text"
-                        name="title"
-                        value={form.title}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
 
-                <br />
+            {/* Event Selection Dropdown */}
+            <label>
+                Select Event
+                <select 
+                    value={selectedEvent?.id || ""} 
+                    onChange={(e) => {
+                        const event = events.find(ev => ev.id === parseInt(e.target.value));
+                        setSelectedEvent(event || null);
+                    }}
+                >
+                    <option value="">-- Choose an event --</option>
+                    {events.map(event => (
+                        <option key={event.id} value={event.id}>
+                            {event.name}
+                        </option>
+                    ))}
+                </select>
+            </label>
 
-                <label>
-                    Description
-                    <textarea
-                        name="description"
-                        value={form.description}
-                        onChange={handleChange}
-                    />
-                </label>
+            <br />
 
-                <br />
+            {/* Edit Form - Only show if event is selected */}
+            {selectedEvent && (
+                <form onSubmit={handleSubmit} style={{ paddingBottom: "100px" }}>
+                    <label>
+                        Event Name
+                        <input
+                            type="text"
+                            name="name"
+                            value={form.name}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
 
-                <label>
-                    From Date & Time
-                    <input
-                        type="datetime-local"
-                        name="fromDateTime"
-                        value={form.fromDateTime}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
+                    <br />
 
-                <br />
+                    <label>
+                        Description
+                        <textarea
+                            name="description"
+                            value={form.description}
+                            onChange={handleChange}
+                        />
+                    </label>
 
-                <label>
-                    Until Date & Time
-                    <input
-                        type="datetime-local"
-                        name="untilDateTime"
-                        value={form.untilDateTime}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
+                    <br />
 
-                <br />
+                    <label>
+                        Date
+                        <input
+                            type="date"
+                            name="date"
+                            value={form.date}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
 
-                <button type="submit">Update Event</button>
+                    <br />
 
-                {message && <p>{message}</p>}
-            </form>
+                    <label>
+                        Start Time
+                        <input
+                            type="time"
+                            name="startTime"
+                            value={form.startTime}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+
+                    <br />
+
+                    <label>
+                        End Time
+                        <input
+                            type="time"
+                            name="endTime"
+                            value={form.endTime}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+
+                    <br />
+
+                    <button type="submit">Update Event</button>
+
+                    {message && <p>{message}</p>}
+                </form>
+            )}
         </div>
     );
 }
