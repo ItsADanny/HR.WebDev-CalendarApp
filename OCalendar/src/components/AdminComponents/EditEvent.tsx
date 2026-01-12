@@ -3,7 +3,7 @@ import "./css/AdminForms.css";
 
 interface Event {
     id: number;
-    name: string;
+    title: string;
     description: string;
     fromDateTime: string;
     untilDateTime: string;
@@ -15,11 +15,10 @@ function EditEvent() {
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
     const [message, setMessage] = useState("");
     const [form, setForm] = useState({
-        name: "",
+        title: "",
         description: "",
-        date: "",
-        startTime: "",
-        endTime: ""
+        fromDateTime: "",
+        untilDateTime: ""
     });
 
     // Fetch all events on mount
@@ -46,11 +45,10 @@ function EditEvent() {
     useEffect(() => {
         if (selectedEvent) {
             setForm({
-                name: selectedEvent.name || "",
+                title: selectedEvent.title || "",
                 description: selectedEvent.description || "",
-                date: selectedEvent.date || "",
-                startTime: selectedEvent.startTime ? selectedEvent.startTime.slice(0, 8) : "",
-                endTime: selectedEvent.endTime ? selectedEvent.endTime.slice(0, 8) : ""
+                fromDateTime: selectedEvent.fromDateTime || "",
+                untilDateTime: selectedEvent.untilDateTime || ""
             });
         }
     }, [selectedEvent]);
@@ -62,9 +60,30 @@ function EditEvent() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!selectedEvent || !form.name || !form.date || !form.startTime || !form.endTime) return;
+        if (!selectedEvent || !form.title || !form.fromDateTime || !form.untilDateTime) return;
 
         try {
+            const token = localStorage.getItem("token");
+            console.log("Using token:", token);
+
+            // Format datetime-local to ISO 8601 with Z suffix
+            const formatDateTime = (dateTimeLocal: string): string => {
+                if (!dateTimeLocal) return "";
+                // Convert "2026-01-12T19:15" to "2026-01-12T19:15:00.000Z"
+                return `${dateTimeLocal}:00.000Z`;
+            };
+
+            const startDateTime = formatDateTime(form.fromDateTime);
+            const endDateTime = formatDateTime(form.untilDateTime);
+
+            const payload = {
+                title: form.title,
+                description: form.description,
+                startDateTime: startDateTime,
+                endDateTime: endDateTime
+            };
+
+            console.log("Sending payload:", payload);
 
             const response = await fetch(`http://localhost:5050/Event/${selectedEvent.id}`, {
                 method: "PUT",
@@ -72,8 +91,10 @@ function EditEvent() {
                     "Content-Type": "application/json",
                     Authorization: `${localStorage.getItem("token")}`
                 },
-                body: JSON.stringify(form)
+                body: JSON.stringify(payload)
             });
+
+            console.log("Response status:", response.status);
 
             if (!response.ok) throw new Error("Failed to update event");
 
@@ -105,7 +126,7 @@ function EditEvent() {
                     <option value="">-- Choose an event --</option>
                     {events.map(event => (
                         <option key={event.id} value={event.id}>
-                            {event.name}
+                            {event.title}
                         </option>
                     ))}
                 </select>
@@ -120,8 +141,8 @@ function EditEvent() {
                         Event Name
                         <input
                             type="text"
-                            name="name"
-                            value={form.name}
+                            name="title"
+                            value={form.title}
                             onChange={handleChange}
                             required
                         />
@@ -141,11 +162,11 @@ function EditEvent() {
                     <br />
 
                     <label>
-                        Date
+                        From DateTime
                         <input
-                            type="date"
-                            name="date"
-                            value={form.date}
+                            type="datetime-local"
+                            name="fromDateTime"
+                            value={form.fromDateTime.slice(0, 16)}
                             onChange={handleChange}
                             required
                         />
@@ -154,24 +175,11 @@ function EditEvent() {
                     <br />
 
                     <label>
-                        Start Time
+                        Until DateTime
                         <input
-                            type="time"
-                            name="startTime"
-                            value={form.startTime}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-
-                    <br />
-
-                    <label>
-                        End Time
-                        <input
-                            type="time"
-                            name="endTime"
-                            value={form.endTime}
+                            type="datetime-local"
+                            name="untilDateTime"
+                            value={form.untilDateTime.slice(0, 16)}
                             onChange={handleChange}
                             required
                         />
