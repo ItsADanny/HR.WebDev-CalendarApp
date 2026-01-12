@@ -14,6 +14,12 @@ function NewBookingForm( { onBookingCreated }: { onBookingCreated: (booking: Boo
 
     const currentUserId = localStorage.getItem("userId");
 
+    // Generate even hours only (08:00, 09:00, 10:00, etc.)
+    const evenHours = Array.from({ length: 16 }, (_, i) => {
+        const hour = (8 + i).toString().padStart(2, '0');
+        return `${hour}:00`;
+    });
+
     useEffect(() => {
         fetch("http://localhost:5050/Room", {
             method: "GET",
@@ -152,13 +158,19 @@ function NewBookingForm( { onBookingCreated }: { onBookingCreated: (booking: Boo
 
                 <label>
                     Time
-                    <input 
-                        type="time" 
-                        name="timeSlot" 
-                        value={form.timeSlot} 
-                        onChange={handleChange} 
-                        required 
-                    />
+                    <select
+                        name="timeSlot"
+                        value={form.timeSlot}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Select a time</option>
+                        {evenHours.map(hour => (
+                            <option key={hour} value={hour}>
+                                {hour}
+                            </option>
+                        ))}
+                    </select>
                 </label>
 
                 <br />

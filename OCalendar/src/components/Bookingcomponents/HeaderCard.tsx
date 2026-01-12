@@ -1,11 +1,9 @@
 import "./css/HeaderCard.css";
+import type { BookedRoom } from './bookedroom.type.ts'
 
-interface HeaderCardProps {
-  title?: string;
-  status?: "Booked" | "Available" | "Attending" | "Not Attending";
-}
-
-function HeaderCard({ title = "Room 101", status = "Booked" }: HeaderCardProps) {
+function HeaderCard({ booking }: { booking: BookedRoom | null }) {
+    const title = booking ? `${booking.room?.name || ''}` : 'Select a Room';
+    const status = booking ? "Booked" : "Available";
     return (
         <>
             <div className="header-card">
