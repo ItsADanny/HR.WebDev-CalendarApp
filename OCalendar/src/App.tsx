@@ -15,6 +15,7 @@ import AllEvents from './components/AdminComponents/AllEvents.tsx';
 import CreateNewEvent from './components/AdminComponents/CreateNewEvent.tsx';
 import DeleteEvent from './components/AdminComponents/DeleteEvent.tsx';
 import EditEvent from './components/AdminComponents/EditEvent.tsx';
+import AttendanceList from './components/AdminComponents/AttendanceList.tsx';
 import { useEffect, useState } from 'react';
 import LogoutBtn from './components/LogoutBtn.tsx';
 
@@ -64,6 +65,7 @@ function App() {
         <Route path="/new-event" element={<ProtectedRoute> <CreateNewEvent /> </ProtectedRoute>} />
         <Route path="/edit-event" element={<ProtectedRoute> <EditEvent /> </ProtectedRoute>} />
         <Route path="/delete-event" element={<ProtectedRoute> <DeleteEvent /> </ProtectedRoute>} />
+        <Route path="/attendance-list" element={<ProtectedRoute> <AttendanceList /> </ProtectedRoute>} />
       </Routes>
 
       { isLoggedIn ? <NavbarLoggedIn /> : null }

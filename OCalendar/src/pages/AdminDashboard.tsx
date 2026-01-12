@@ -13,6 +13,7 @@ function AdminDashboard() {
                     <NavLink to="/new-event" className="nav-link">Create New Event</NavLink>
                     <NavLink to="/edit-event" className="nav-link">Edit Event</NavLink>
                     <NavLink to="/delete-event" className="nav-link">Delete Event</NavLink>
+                    <NavLink to="/attendance-list" className="nav-link">Attendance List</NavLink>
                 </ul>
             </nav>
         </>
