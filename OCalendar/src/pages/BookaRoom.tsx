@@ -15,9 +15,6 @@ function BookaRoom() {
     // select no room by default
     const [selectedRoom, setSelectedRoom] = useState<BookedRoom | null>(null);
 
-    // Comments
-    const [comments, setComments] = useState("");
-
     const [bookedRooms, setBookedRooms] = useState<BookedRoom[]>([]);
 
     useEffect(() => {
@@ -50,28 +47,19 @@ function BookaRoom() {
         if (!confirmDelete) return;
 
         try {
-            console.log("point 1");
-
             const response = await fetch(`http://localhost:5050/RoomBooking/${selectedRoom.id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json', 'Authorization':`${localStorage.getItem('token')}` }
             });
-            
-            console.log("point 2, response status: ", response.status);
 
             if (!response.ok) {
                 throw new Error('Failed to cancel booking');
             }
-            console.log("point 3");
 
             // Refresh booked rooms list
             setBookedRooms(prevRooms => prevRooms.filter(room => room.id !== selectedRoom.id));
 
-            console.log("point 4");
-
             setSelectedRoom(null); // Deselect room after cancellation
-
-            console.log("point 5");
 
             alert('Booking cancelled successfully');
 
