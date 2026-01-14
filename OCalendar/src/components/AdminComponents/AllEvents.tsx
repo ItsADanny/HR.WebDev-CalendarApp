@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import LogoutBtn from '../LogoutBtn';
+import type { CalendarEvent } from '../../types/CalendarEvent';
 
 
 function AllEvents() {
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState<CalendarEvent[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

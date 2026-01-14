@@ -31,7 +31,7 @@ function AttendingCardHeader({ event, attendance, openModal }: AttendingCardHead
     };
 
     const getUIAttendingResult = (attendance : EventAttendance | null) : string => {
-        if (attendance === null) return 'Not awnsered'
+        if (attendance === null) return 'Not answered'
 
         switch (attendance.attending) {
             case true:
