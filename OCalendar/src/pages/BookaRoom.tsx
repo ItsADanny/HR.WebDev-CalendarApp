@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import type { BookedRoom } from '../components/Bookingcomponents/bookedroom.type.ts'
 import BookaNewRoom from "./BookaNewRoom.tsx";
 import "../stylesheets/BookaNewRoom.css";
+import LogoutBtn from "../components/LogoutBtn.tsx";
+import NavbarLoggedIn from "../components/NavbarLoggedIn.tsx";
 
 function BookaRoom() {
 
@@ -103,6 +105,12 @@ function BookaRoom() {
                 </div>
             </div>
         </div>
+        <NavbarLoggedIn navbarItems={[
+                    { name: "Calendar", path: "/calendar" },
+                    { name: "Attending", path: "/attending" },
+                    { name: "Book a Room", path: "/book-a-room" }
+                ]} />
+        <LogoutBtn />
     </>
   );
 }

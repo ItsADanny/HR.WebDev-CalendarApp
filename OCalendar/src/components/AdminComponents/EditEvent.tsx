@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./css/AdminForms.css";
+import LogoutBtn from "../LogoutBtn";
+import NavbarLoggedIn from "../NavbarLoggedIn";
 
 interface Event {
     id: number;
@@ -110,89 +112,99 @@ function EditEvent() {
     };
 
     return (
-        <div className="new-event-card">
-            <h1>Edit Event</h1>
+        <>
+            <div className="new-event-card">
+                <h1>Edit Event</h1>
 
-            {/* Event Selection Dropdown */}
-            <label>
-                Select Event
-                <select 
-                    value={selectedEvent?.id || ""} 
-                    onChange={(e) => {
-                        const event = events.find(ev => ev.id === parseInt(e.target.value));
-                        setSelectedEvent(event || null);
-                    }}
-                >
-                    <option value="">-- Choose an event --</option>
-                    {events.map(event => (
-                        <option key={event.id} value={event.id}>
-                            {event.title}
-                        </option>
-                    ))}
-                </select>
-            </label>
+                {/* Event Selection Dropdown */}
+                <label>
+                    Select Event
+                    <select 
+                        value={selectedEvent?.id || ""} 
+                        onChange={(e) => {
+                            const event = events.find(ev => ev.id === parseInt(e.target.value));
+                            setSelectedEvent(event || null);
+                        }}
+                    >
+                        <option value="">-- Choose an event --</option>
+                        {events.map(event => (
+                            <option key={event.id} value={event.id}>
+                                {event.title}
+                            </option>
+                        ))}
+                    </select>
+                </label>
 
-            <br />
+                <br />
 
-            {/* Edit Form - Only show if event is selected */}
-            {selectedEvent && (
-                <form onSubmit={handleSubmit} style={{ paddingBottom: "100px" }}>
-                    <label>
-                        Event Name
-                        <input
-                            type="text"
-                            name="title"
-                            value={form.title}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
+                {/* Edit Form - Only show if event is selected */}
+                {selectedEvent && (
+                    <form onSubmit={handleSubmit} style={{ paddingBottom: "100px" }}>
+                        <label>
+                            Event Name
+                            <input
+                                type="text"
+                                name="title"
+                                value={form.title}
+                                onChange={handleChange}
+                                required
+                            />
+                        </label>
 
-                    <br />
+                        <br />
 
-                    <label>
-                        Description
-                        <textarea
-                            name="description"
-                            value={form.description}
-                            onChange={handleChange}
-                        />
-                    </label>
+                        <label>
+                            Description
+                            <textarea
+                                name="description"
+                                value={form.description}
+                                onChange={handleChange}
+                            />
+                        </label>
 
-                    <br />
+                        <br />
 
-                    <label>
-                        From DateTime
-                        <input
-                            type="datetime-local"
-                            name="fromDateTime"
-                            value={form.fromDateTime.slice(0, 16)}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
+                        <label>
+                            From DateTime
+                            <input
+                                type="datetime-local"
+                                name="fromDateTime"
+                                value={form.fromDateTime.slice(0, 16)}
+                                onChange={handleChange}
+                                required
+                            />
+                        </label>
 
-                    <br />
+                        <br />
 
-                    <label>
-                        Until DateTime
-                        <input
-                            type="datetime-local"
-                            name="untilDateTime"
-                            value={form.untilDateTime.slice(0, 16)}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
+                        <label>
+                            Until DateTime
+                            <input
+                                type="datetime-local"
+                                name="untilDateTime"
+                                value={form.untilDateTime.slice(0, 16)}
+                                onChange={handleChange}
+                                required
+                            />
+                        </label>
 
-                    <br />
+                        <br />
 
-                    <button type="submit">Update Event</button>
+                        <button type="submit">Update Event</button>
 
-                    {message && <p>{message}</p>}
-                </form>
-            )}
-        </div>
+                        {message && <p>{message}</p>}
+                    </form>
+                )}
+            </div>
+            <NavbarLoggedIn navbarItems={[
+                { name: "All Events", path: "/all-events" },
+                { name: "Create New Event", path: "/new-event" },
+                { name: "Edit Event", path: "/edit-event" },
+                { name: "Delete Event", path: "/delete-event" },
+                { name: "Attendance List", path: "/attendance-list" }
+            ]} />
+            <LogoutBtn />
+        </>
     );
 }
 

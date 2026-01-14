@@ -6,6 +6,8 @@ import type { EventAttendance } from "../types/EventAttendance";
 import type { EventComment } from "../types/EventComment";
 import AttendingCard from '../components/Attendingcomponents/attendingCard';
 import AttendingCardAwnserModal from '../components/Attendingcomponents/Modal/attendingCardAwnserModal';
+import LogoutBtn from '../components/LogoutBtn';
+import NavbarLoggedIn from '../components/NavbarLoggedIn';
 
 function Attending() {
     const { eventId } = useParams();
@@ -336,6 +338,12 @@ function Attending() {
                 }
             </div>
         </div>
+        <NavbarLoggedIn navbarItems={[
+                    { name: "Calendar", path: "/calendar" },
+                    { name: "Attending", path: "/attending" },
+                    { name: "Book a Room", path: "/book-a-room" }
+                ]} />
+        <LogoutBtn />
     </>
     );
 }

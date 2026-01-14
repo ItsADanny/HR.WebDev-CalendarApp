@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import NavbarLoggedIn from '../NavbarLoggedIn';
+import LogoutBtn from '../LogoutBtn';
 
 interface Event {
     id: number;
@@ -73,6 +75,7 @@ function AttendanceList() {
     if (loading) return <p>Loading...</p>;
 
     return (
+        <>
         <div>
             <h2>Attendance List</h2>
             {events.map(event => {
@@ -95,6 +98,15 @@ function AttendanceList() {
                 );
             })}
         </div>
+        <NavbarLoggedIn navbarItems={[
+            { name: "All Events", path: "/all-events" },
+            { name: "Create New Event", path: "/new-event" },
+            { name: "Edit Event", path: "/edit-event" },
+            { name: "Delete Event", path: "/delete-event" },
+            { name: "Attendance List", path: "/attendance-list" }
+        ]} />
+        <LogoutBtn />
+        </>
     );
 }
 

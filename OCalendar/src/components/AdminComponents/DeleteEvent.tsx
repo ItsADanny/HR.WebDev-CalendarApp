@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import LogoutBtn from '../LogoutBtn';
+import NavbarLoggedIn from '../NavbarLoggedIn';
 
 interface Event {
     id: number;
@@ -64,39 +66,49 @@ function DeleteEvent() {
     if (loading) return <p>Loading...</p>;
 
     return (
-        <div style={{ padding: '20px' }}>
-            <div className="events-container">
-                <h2>Events ({events.length})</h2>
-                {events.length === 0 ? (
-                    <p>No events</p>
-                ) : (
-                    <div>
-                        {events.map(event => (
-                            <div key={event.id} style={{ border: '1px solid #ddd', padding: '15px', marginBottom: '10px', borderRadius: '5px' }}>
-                                <h3>{event.title}</h3>
-                                <p><strong>ID:</strong> {event.id}</p>
-                                <p><strong>Description:</strong> {event.description}</p>
-                                <p><strong>From:</strong> {new Date(event.fromDateTime).toLocaleString()}</p>
-                                <p><strong>Until:</strong> {new Date(event.untilDateTime).toLocaleString()}</p>
-                                <button 
-                                    onClick={() => handleDeleteEvent(event.id, event.title)}
-                                    style={{ 
-                                        padding: '8px 16px', 
-                                        backgroundColor: '#dc3545', 
-                                        color: 'white', 
-                                        border: 'none', 
-                                        borderRadius: '4px', 
-                                        cursor: 'pointer' 
-                                    }}
-                                >
-                                    Delete Event
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                )}
+        <>
+            <div style={{ padding: '20px' }}>
+                <div className="events-container">
+                    <h2>Events ({events.length})</h2>
+                    {events.length === 0 ? (
+                        <p>No events</p>
+                    ) : (
+                        <div>
+                            {events.map(event => (
+                                <div key={event.id} style={{ border: '1px solid #ddd', padding: '15px', marginBottom: '10px', borderRadius: '5px' }}>
+                                    <h3>{event.title}</h3>
+                                    <p><strong>ID:</strong> {event.id}</p>
+                                    <p><strong>Description:</strong> {event.description}</p>
+                                    <p><strong>From:</strong> {new Date(event.fromDateTime).toLocaleString()}</p>
+                                    <p><strong>Until:</strong> {new Date(event.untilDateTime).toLocaleString()}</p>
+                                    <button 
+                                        onClick={() => handleDeleteEvent(event.id, event.title)}
+                                        style={{ 
+                                            padding: '8px 16px', 
+                                            backgroundColor: '#dc3545', 
+                                            color: 'white', 
+                                            border: 'none', 
+                                            borderRadius: '4px', 
+                                            cursor: 'pointer' 
+                                        }}
+                                    >
+                                        Delete Event
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
+            <NavbarLoggedIn navbarItems={[
+                { name: "All Events", path: "/all-events" },
+                { name: "Create New Event", path: "/new-event" },
+                { name: "Edit Event", path: "/edit-event" },
+                { name: "Delete Event", path: "/delete-event" },
+                { name: "Attendance List", path: "/attendance-list" }
+            ]} />
+            <LogoutBtn />
+        </>
     );
 }
 

@@ -7,6 +7,8 @@ import BookedRooms from "../components/Bookingcomponents/BookedRooms.tsx";
 import type { BookedRoom } from "../components/Bookingcomponents/bookedroom.type.ts";
 import NewBookingForm from "../components/NewBookingcomp/NewBookingForm.tsx";
 import OrangeLogo from '../assets/Orange.png'
+import LogoutBtn from "../components/LogoutBtn.tsx";
+import NavbarLoggedIn from "../components/NavbarLoggedIn.tsx";
 
 function BookaNewRoom() {
 
@@ -39,6 +41,12 @@ function BookaNewRoom() {
                 </div>
             </div>
         </div>
+        <NavbarLoggedIn navbarItems={[
+                    { name: "Calendar", path: "/calendar" },
+                    { name: "Attending", path: "/attending" },
+                    { name: "Book a Room", path: "/book-a-room" }
+                ]} />
+        <LogoutBtn />
     </>
   );
 }

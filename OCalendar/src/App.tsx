@@ -68,8 +68,10 @@ function App() {
         <Route path="/attendance-list" element={<ProtectedRoute> <AttendanceList /> </ProtectedRoute>} />
       </Routes>
 
-      { isLoggedIn ? <NavbarLoggedIn /> : null }
-      { isLoggedIn ? <LogoutBtn /> : null }
+      {/* NOTE ITSDANNY: This has been disabled, as it didn't work reliably.
+      The navbar and logout button are now included in the pages themselves */}
+      {/* { isLoggedIn ? <NavbarLoggedIn /> : null } */}
+      {/* { isLoggedIn ? <LogoutBtn /> : null } */}
     </>
   )
 }
