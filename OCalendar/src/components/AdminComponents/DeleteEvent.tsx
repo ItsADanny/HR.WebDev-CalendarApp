@@ -111,7 +111,7 @@ function DeleteEvent() {
                 { name: "Create New Event", path: "/new-event" },
                 { name: "Edit Event", path: "/edit-event" },
                 { name: "Delete Event", path: "/delete-event" },
-                { name: "Attendance List", path: "/attendance-list" }
+                // { name: "Attendance List", path: "/attendance-list" }
             ]} />
             <LogoutBtn />
         </>

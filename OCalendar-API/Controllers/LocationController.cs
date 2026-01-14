@@ -37,7 +37,7 @@ public class LocationController : ControllerBase
     [HttpGet("city/{city:alpha}")]
     public ActionResult<IEnumerable<Location>> GetByCity(string city)
     {
-        IEnumerable<Location>? foundLocations = _locationService.GetByName(city);
+        IEnumerable<Location>? foundLocations = _locationService.GetByCity(city);
         if (foundLocations == null) return NotFound();
         return Ok(foundLocations);
     }
@@ -45,7 +45,7 @@ public class LocationController : ControllerBase
     [HttpGet("street/{street:alpha}")]
     public ActionResult<IEnumerable<Location>> GetByStreet(string street)
     {
-        IEnumerable<Location>? foundLocations = _locationService.GetByName(street);
+        IEnumerable<Location>? foundLocations = _locationService.GetByStreet(street);
         if (foundLocations == null) return NotFound();
         return Ok(foundLocations);
     }
@@ -61,7 +61,7 @@ public class LocationController : ControllerBase
     [HttpGet("houseNumber/{houseNumber:alpha}")]
     public ActionResult<IEnumerable<Location>> GetByHouseNumber(string houseNumber)
     {
-        IEnumerable<Location>? foundLocations = _locationService.GetByName(houseNumber);
+        IEnumerable<Location>? foundLocations = _locationService.GetByHouseNumber(houseNumber);
         if (foundLocations == null) return NotFound();
         return Ok(foundLocations);
     }
