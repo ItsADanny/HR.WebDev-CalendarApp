@@ -1,1 +1,1 @@
-public record RoleDto(string name, int allowedManageRooms, int allowedManageTimeslots, int allowedManageUsers, int allowedManageEvents, int userID);
+public record RoleDto(string name, int allowedManageRooms, int allowedManageTimeslots, int allowedManageUsers, int allowedManageEvents, int allowedInAdminPanel, int userID);

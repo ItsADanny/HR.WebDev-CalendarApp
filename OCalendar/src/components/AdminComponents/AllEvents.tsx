@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react';
-
+import LogoutBtn from '../LogoutBtn';
+import NavbarLoggedIn from '../NavbarLoggedIn';
+import { useNavigate } from 'react-router-dom';
+import type { CalendarEvent } from '../../types/CalendarEvent';
 
 function AllEvents() {
-    const [events, setEvents] = useState([]);
+    if (localStorage.getItem('adminPanelAccess') !== '1') {
+        const navigate = useNavigate();
+        navigate('/calendar');
+    }
+
+    const [events, setEvents] = useState<CalendarEvent[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -32,18 +40,28 @@ function AllEvents() {
     if (loading) return <p>Loading...</p>;
 
     return (
-        <div>
-            <h2>Events</h2>
-            {events.length === 0 ? (
-                <p>No events</p>
-            ) : (
-                <ul>
-                    {events.map(event => (
-                        <li key={event.id}> <strong>{event.title}</strong> | {event.description}</li>
-                    ))}
-                </ul>
-            )}
-        </div>
+        <>
+            <div>
+                <h2>Events</h2>
+                {events.length === 0 ? (
+                    <p>No events</p>
+                ) : (
+                    <ul>
+                        {events.map(event => (
+                            <li key={event.id}> <strong>{event.title}</strong> | {event.description}</li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+            <NavbarLoggedIn navbarItems={[
+                { name: "All Events", path: "/all-events" },
+                { name: "Create New Event", path: "/new-event" },
+                { name: "Edit Event", path: "/edit-event" },
+                { name: "Delete Event", path: "/delete-event" },
+                { name: "Attendance List", path: "/attendance-list" }
+            ]} />
+            <LogoutBtn />
+        </>
     );
 }
 

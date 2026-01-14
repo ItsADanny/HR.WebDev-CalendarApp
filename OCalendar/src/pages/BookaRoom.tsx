@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import '../stylesheets/BookaRoom.css';
 import HeaderCard from "../components/Bookingcomponents/HeaderCard.tsx";
 import RoomInfoCard from "../components/Bookingcomponents/RoomInfoCard.tsx";
@@ -8,15 +8,18 @@ import { useState, useEffect } from "react";
 import type { BookedRoom } from '../components/Bookingcomponents/bookedroom.type.ts'
 import BookaNewRoom from "./BookaNewRoom.tsx";
 import "../stylesheets/BookaNewRoom.css";
+import LogoutBtn from "../components/LogoutBtn.tsx";
+import NavbarLoggedIn from "../components/NavbarLoggedIn.tsx";
 
 function BookaRoom() {
+    if (localStorage.getItem('adminPanelAccess') === '1') {
+        const navigate = useNavigate();
+        navigate('/admin-dashboard');
+    }
 
     // Currently selected room
     // select no room by default
     const [selectedRoom, setSelectedRoom] = useState<BookedRoom | null>(null);
-
-    // Comments
-    const [comments, setComments] = useState("");
 
     const [bookedRooms, setBookedRooms] = useState<BookedRoom[]>([]);
 
@@ -50,28 +53,19 @@ function BookaRoom() {
         if (!confirmDelete) return;
 
         try {
-            console.log("point 1");
-
             const response = await fetch(`http://localhost:5050/RoomBooking/${selectedRoom.id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json', 'Authorization':`${localStorage.getItem('token')}` }
             });
-            
-            console.log("point 2, response status: ", response.status);
 
             if (!response.ok) {
                 throw new Error('Failed to cancel booking');
             }
-            console.log("point 3");
 
             // Refresh booked rooms list
             setBookedRooms(prevRooms => prevRooms.filter(room => room.id !== selectedRoom.id));
 
-            console.log("point 4");
-
             setSelectedRoom(null); // Deselect room after cancellation
-
-            console.log("point 5");
 
             alert('Booking cancelled successfully');
 
@@ -115,6 +109,12 @@ function BookaRoom() {
                 </div>
             </div>
         </div>
+        <NavbarLoggedIn navbarItems={[
+                    { name: "Calendar", path: "/calendar" },
+                    { name: "Attending", path: "/attending" },
+                    { name: "Book a Room", path: "/book-a-room" }
+                ]} />
+        <LogoutBtn />
     </>
   );
 }

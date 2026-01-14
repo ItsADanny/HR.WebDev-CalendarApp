@@ -7,6 +7,15 @@ import { useNavigate } from 'react-router-dom'
 function Login() {
     const navigate = useNavigate();
 
+    //Before doing anything, Check to see if the user is already logged in
+    if (localStorage.getItem('token') !== null || '') {
+        if (localStorage.getItem('adminPanelAccess') === '1') {
+            navigate('/admin-dashboard');
+        } else {
+            navigate('/calendar');
+        }
+    }
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -28,10 +37,41 @@ function Login() {
                 setError(data.message || "Login failed");
                 return;
             }
+            
+            //Added this so that we can retrieve the users role so we can see which permission they have
+            const responseUser = await fetch(`http://localhost:5050/User/${data.userId}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json", 'Authorization':`${data.token}` }
+            });
+
+            const userData = await responseUser.json();
+
+            if (!responseUser.ok) {
+                setError(userData.message || "Failed to fetch user data");
+                return;
+            }
+
+            const responseRole = await fetch(`http://localhost:5050/Role/${userData.roleId}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json", 'Authorization':`${data.token}` }
+            });
+
+            const roleData = await responseRole.json();
+
+            if (!responseRole.ok) {
+                setError(roleData.message || "Failed to fetch user role");
+                return;
+            }
+
             localStorage.setItem('token', data.token);
             localStorage.setItem('userId', data.userId);
+            localStorage.setItem('adminPanelAccess', roleData.allowedInAdminPanel);
 
-            navigate('/calendar');
+            if (roleData.allowedInAdminPanel === 1) {
+                navigate('/admin-dashboard');
+            } else {
+                navigate('/calendar');
+            }
         } catch (err: any) {
             setError(err.message);
         }

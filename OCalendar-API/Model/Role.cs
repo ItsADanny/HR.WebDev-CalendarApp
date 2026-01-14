@@ -11,6 +11,7 @@ public class Role
     public int AllowedManageTimeslots { get; set; } = 0;
     public int AllowedManageUsers { get; set; } = 0;
     public int AllowedManageEvents { get; set; } = 0;
+    public int AllowedInAdminPanel { get; set; } = 0;
     public int? CreateByUserId { get; set; }
     [JsonIgnore]
     public User? CreateByUser { get; set; }

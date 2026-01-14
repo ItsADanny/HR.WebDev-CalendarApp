@@ -1,13 +1,20 @@
 import '../stylesheets/Attending.css';
 import { useEffect, useState } from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import type { CalendarEvent } from '../types/CalendarEvent';
 import type { EventAttendance } from "../types/EventAttendance";
 import type { EventComment } from "../types/EventComment";
 import AttendingCard from '../components/Attendingcomponents/attendingCard';
 import AttendingCardAwnserModal from '../components/Attendingcomponents/Modal/attendingCardAwnserModal';
+import LogoutBtn from '../components/LogoutBtn';
+import NavbarLoggedIn from '../components/NavbarLoggedIn';
 
 function Attending() {
+    if (localStorage.getItem('adminPanelAccess') === '1') {
+        const navigate = useNavigate();
+        navigate('/admin-dashboard');
+    }
+
     const { eventId } = useParams();
 
     //UseState for declaring that we made an update
@@ -336,6 +343,12 @@ function Attending() {
                 }
             </div>
         </div>
+        <NavbarLoggedIn navbarItems={[
+                    { name: "Calendar", path: "/calendar" },
+                    { name: "Attending", path: "/attending" },
+                    { name: "Book a Room", path: "/book-a-room" }
+                ]} />
+        <LogoutBtn />
     </>
     );
 }

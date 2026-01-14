@@ -1,7 +1,15 @@
 import { useState } from "react";
 import "./css/AdminForms.css";
+import LogoutBtn from "../LogoutBtn";
+import NavbarLoggedIn from "../NavbarLoggedIn";
+import { useNavigate } from "react-router-dom";
 
 function CreateNewEvent({ onEventCreated }: { onEventCreated: (event: any) => void }) {
+    if (localStorage.getItem('adminPanelAccess') !== '1') {
+        const navigate = useNavigate();
+        navigate('/calendar');
+    }
+
     const [message, setMessage] = useState("");
 
     const [form, setForm] = useState({
@@ -10,8 +18,6 @@ function CreateNewEvent({ onEventCreated }: { onEventCreated: (event: any) => vo
         fromDateTime: "",
         untilDateTime: "",
     });
-
-
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -52,64 +58,74 @@ function CreateNewEvent({ onEventCreated }: { onEventCreated: (event: any) => vo
     };
 
     return (
-        <div className="new-event-card">
-            <h1>Create New Event</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Title
-                    <input
-                        type="text"
-                        name="title"
-                        value={form.title}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
+        <>
+            <div className="new-event-card">
+                <h1>Create New Event</h1>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Title
+                        <input
+                            type="text"
+                            name="title"
+                            value={form.title}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
 
-                <br />
+                    <br />
 
-                <label>
-                    Description
-                    <textarea
-                        name="description"
-                        value={form.description}
-                        onChange={handleChange}
-                    />
-                </label>
+                    <label>
+                        Description
+                        <textarea
+                            name="description"
+                            value={form.description}
+                            onChange={handleChange}
+                        />
+                    </label>
 
-                <br />
+                    <br />
 
-                <label>
-                    From Date & Time
-                    <input
-                        type="datetime-local"
-                        name="fromDateTime"
-                        value={form.fromDateTime}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
+                    <label>
+                        From Date & Time
+                        <input
+                            type="datetime-local"
+                            name="fromDateTime"
+                            value={form.fromDateTime}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
 
-                <br />
+                    <br />
 
-                <label>
-                    Until Date & Time
-                    <input
-                        type="datetime-local"
-                        name="untilDateTime"
-                        value={form.untilDateTime}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
+                    <label>
+                        Until Date & Time
+                        <input
+                            type="datetime-local"
+                            name="untilDateTime"
+                            value={form.untilDateTime}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
 
-                <br />
+                    <br />
 
-                <button type="submit">Create Event</button>
+                    <button type="submit">Create Event</button>
 
-                {message && <p>{message}</p>}
-            </form>
-        </div>
+                    {message && <p>{message}</p>}
+                </form>
+            </div>
+            <NavbarLoggedIn navbarItems={[
+                { name: "All Events", path: "/all-events" },
+                { name: "Create New Event", path: "/new-event" },
+                { name: "Edit Event", path: "/edit-event" },
+                { name: "Delete Event", path: "/delete-event" },
+                { name: "Attendance List", path: "/attendance-list" }
+            ]} />
+            <LogoutBtn />
+        </>
     );
 }
 

@@ -30,6 +30,7 @@ public class RoleService : IRoleService
             AllowedManageTimeslots = roleDto.allowedManageTimeslots,
             AllowedManageUsers = roleDto.allowedManageUsers,
             AllowedManageEvents = roleDto.allowedManageEvents,
+            AllowedInAdminPanel = roleDto.allowedInAdminPanel,
             CreateByUser = foundUser,
             CreateDateTime = DateTime.Now
         };
@@ -67,6 +68,7 @@ public class RoleService : IRoleService
         foundRole.AllowedManageTimeslots = roleDto.allowedManageTimeslots;
         foundRole.AllowedManageUsers = roleDto.allowedManageUsers;
         foundRole.AllowedManageEvents = roleDto.allowedManageEvents;
+        foundRole.AllowedInAdminPanel = roleDto.allowedInAdminPanel;
         foundRole.UpdateByUser = foundUser;
         foundRole.UpdateDateTime = DateTime.Now;
 

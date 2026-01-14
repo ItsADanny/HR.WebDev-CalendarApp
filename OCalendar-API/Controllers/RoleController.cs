@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 [Route("[controller]")]
 [ServiceFilter(typeof(LoginFilter))]
-[TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageUsers })]
 public class RoleController : ControllerBase
 {
     private readonly IRoleService _roleService;
@@ -30,6 +29,7 @@ public class RoleController : ControllerBase
         return Ok(foundRole);
     }
 
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageUsers })]
     [HttpGet("search/{search:alpha}")]
     public ActionResult<IEnumerable<Event>> GetByName(string search)
     {
@@ -41,6 +41,7 @@ public class RoleController : ControllerBase
     // ====================================================================================
     // POST
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageUsers })]
     [HttpPost("")]
     public ActionResult<Role> Create([FromBody] RoleDto R)
     {
@@ -50,6 +51,7 @@ public class RoleController : ControllerBase
     // ====================================================================================
     // PUT
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageUsers })]
     [HttpPut("{id:int}")]
     public ActionResult<Role> Update(int id, [FromBody] RoleDto R)
     {
@@ -60,6 +62,7 @@ public class RoleController : ControllerBase
     // ====================================================================================
     // DELETE
     // ====================================================================================
+    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageUsers })]
     [HttpDelete("{id:int}")]
     public ActionResult<Event> Delete(int id) => _roleService.Delete(id) ? Ok() : NotFound();
 }

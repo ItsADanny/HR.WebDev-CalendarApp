@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import '../stylesheets/Calendar.css'
 import type { CalendarEvent } from '../types/CalendarEvent';
 import type { EventAttendance } from '../types/EventAttendance';
 import LogoutBtn from '../components/LogoutBtn';
+import NavbarLoggedIn from '../components/NavbarLoggedIn';
 
 function Calendar() {
+    if (localStorage.getItem('adminPanelAccess') === '1') {
+        const navigate = useNavigate();
+        navigate('/admin-dashboard');
+    }
+
     //Calendar text for English
     const daysOfTheWeek_EN : string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     const monthsOfTheYear_EN: string[] = ["January", "February", "March", "April", "May",
@@ -195,112 +201,120 @@ function Calendar() {
     const DTToTimeStr = (DTValue: Date): string => DTValue.toLocaleDateString([], {hour: '2-digit', minute: '2-digit', hour12: false});
 
     return (
-        <div className="Calendar__white-box">
-            <div className="Calendar__white-box-inside">
-                <h3>OCalendar</h3>
-                <div className="Calendar__event-title-underline"></div>
-                <div className="calendar">
-                    <div className="calendar-navigation">
-                        <button className='calendar-navigation-buttons-back' onClick={prevMonth} >⟵</button>
-                        <h2 key='${currentMonth}-${currentYear}-${currentLang}' className="calendar-navigation-text ${textDirection}">{selectedLanguage_MonthsOfTheYear[currentMonth]} {currentYear}</h2>
-                        <button className='calendar-navigation-buttons-forward' onClick={nextMonth} >⟶</button>
-                    </div>
-                    <div className='calendar-weekdays'>
-                        {
-                            //[NOTES from ItsDanny]
-                            //Callback on each element in the array and returns a new array with the results from the callback
-                            //In this instance it will return a new array with <span>{day}</span> for each day in our selectedLanguage_DaysOfTheWeek
-                            //array
-                            selectedLanguage_DaysOfTheWeek.map((day: string) => <span key={day}>{day}</span>)
-                        }
-                    </div>
-                    <div className='calendar-days'>
-                        {
-                            //[NOTES from ItsDanny]
-                            //This code is used to generate the display dates before the start date of the month (Like you can see in Apple Calendar for instance)
-                            //This is a modified version of the same code we use under this part to generate all the other days for the calendar.
-                            //The differences are in that this version has 2 extra checks (to see if the month starts on a 1 (Monday) and to see if the month start on a 0 (Sunday)
-                            //) and in the way that we use index for our dates
+        <>
+            <div className="Calendar__white-box">
+                <div className="Calendar__white-box-inside">
+                    <h3>OCalendar</h3>
+                    <div className="Calendar__event-title-underline"></div>
+                    <div className="calendar">
+                        <div className="calendar-navigation">
+                            <button className='calendar-navigation-buttons-back' onClick={prevMonth} >⟵</button>
+                            <h2 key='${currentMonth}-${currentYear}-${currentLang}' className="calendar-navigation-text ${textDirection}">{selectedLanguage_MonthsOfTheYear[currentMonth]} {currentYear}</h2>
+                            <button className='calendar-navigation-buttons-forward' onClick={nextMonth} >⟶</button>
+                        </div>
+                        <div className='calendar-weekdays'>
+                            {
+                                //[NOTES from ItsDanny]
+                                //Callback on each element in the array and returns a new array with the results from the callback
+                                //In this instance it will return a new array with <span>{day}</span> for each day in our selectedLanguage_DaysOfTheWeek
+                                //array
+                                selectedLanguage_DaysOfTheWeek.map((day: string) => <span key={day}>{day}</span>)
+                            }
+                        </div>
+                        <div className='calendar-days'>
+                            {
+                                //[NOTES from ItsDanny]
+                                //This code is used to generate the display dates before the start date of the month (Like you can see in Apple Calendar for instance)
+                                //This is a modified version of the same code we use under this part to generate all the other days for the calendar.
+                                //The differences are in that this version has 2 extra checks (to see if the month starts on a 1 (Monday) and to see if the month start on a 0 (Sunday)
+                                //) and in the way that we use index for our dates
 
-                            //Check to see if the first day of the month is 1 (Monday) 
-                            //if so we don't need to show any before dates, else we generate the days before the first day of the month
-                            firstDayOfTheMonth === 1 ? 
-                            [] : [...Array(
-                                    //This check will prevent the array from going out of range when the start day of the month is 0 (Sunday)
-                                    (firstDayOfTheMonth - 1 < 0 ? 7 : firstDayOfTheMonth) - 1
-                                )
-                                //We use keys to return a iterable array for the keys of our new Array
-                                .keys()]
-                                //Then we use Map to generate the required HTML <span> elements
-                                .map(
-                                    (_: number, index: number) => <div 
-                                        key={"p" + (daysInThePreviouseMonth - index)}
-                                        className='calendar-days-prev'
-                                    >
-                                        {daysInThePreviouseMonth - index}
-                                    </div>
-                                ).reverse()
-                                //Finally we reverse our output to get the dates in the correct order
-                        }
-                        {
-                            [...Array(daysInTheMonth).keys()].map((day: number) => (
-                                <div key={day + 1}>
-                                    <div className={IsCurrentDay(day) ? "calendar-days-current" : ""}>
-                                        {day + 1}
-                                    </div>
+                                //Check to see if the first day of the month is 1 (Monday) 
+                                //if so we don't need to show any before dates, else we generate the days before the first day of the month
+                                firstDayOfTheMonth === 1 ? 
+                                [] : [...Array(
+                                        //This check will prevent the array from going out of range when the start day of the month is 0 (Sunday)
+                                        (firstDayOfTheMonth - 1 < 0 ? 7 : firstDayOfTheMonth) - 1
+                                    )
+                                    //We use keys to return a iterable array for the keys of our new Array
+                                    .keys()]
+                                    //Then we use Map to generate the required HTML <span> elements
+                                    .map(
+                                        (_: number, index: number) => <div 
+                                            key={"p" + (daysInThePreviouseMonth - index)}
+                                            className='calendar-days-prev'
+                                        >
+                                            {daysInThePreviouseMonth - index}
+                                        </div>
+                                    ).reverse()
+                                    //Finally we reverse our output to get the dates in the correct order
+                            }
+                            {
+                                [...Array(daysInTheMonth).keys()].map((day: number) => (
+                                    <div key={day + 1}>
+                                        <div className={IsCurrentDay(day) ? "calendar-days-current" : ""}>
+                                            {day + 1}
+                                        </div>
 
-                                    {
-                                        hasEventOnDay(day) === true ? 
-                                            [Array(getEventsOnDay(day)).map(
-                                                (CalEventList: CalendarEvent[]) => 
-                                                    <div className='calendar-days-eventlist'>{CalEventList.map(
-                                                        (CalEvent: CalendarEvent) =>
-                                                            <NavLink to={"/attending/" + CalEvent.id}>
-                                                                <div key={"CalE." + CalEvent.id} className={'calendar-item' + getAttendingResult(CalEvent.id)} title={CalEvent.description + "\n\nFrom: " + 
-                                                                                                                    DTToTimeStr(new Date(CalEvent.fromDateTime)) + "\nUntil: " + 
-                                                                                                                    DTToTimeStr(new Date(CalEvent.untilDateTime))}>
-                                                                    {CalEvent.title}
-                                                                </div>
-                                                            </NavLink>
-                                                        )}
-                                                    </div>)
-                                            ] 
-                                        : null
-                                    }
-                                    
-                                </div>
-                            ))
-                        }
+                                        {
+                                            hasEventOnDay(day) === true ? 
+                                                [Array(getEventsOnDay(day)).map(
+                                                    (CalEventList: CalendarEvent[]) => 
+                                                        <div className='calendar-days-eventlist'>{CalEventList.map(
+                                                            (CalEvent: CalendarEvent) =>
+                                                                <NavLink to={"/attending/" + CalEvent.id}>
+                                                                    <div key={"CalE." + CalEvent.id} className={'calendar-item' + getAttendingResult(CalEvent.id)} title={CalEvent.description + "\n\nFrom: " + 
+                                                                                                                        DTToTimeStr(new Date(CalEvent.fromDateTime)) + "\nUntil: " + 
+                                                                                                                        DTToTimeStr(new Date(CalEvent.untilDateTime))}>
+                                                                        {CalEvent.title}
+                                                                    </div>
+                                                                </NavLink>
+                                                            )}
+                                                        </div>)
+                                                ] 
+                                            : null
+                                        }
+                                        
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="Calendar__event-list">
-                <h3>{selectedLanguage_OtherUIText[0]} - {selectedLanguage_MonthsOfTheYear[currentMonth]} {currentYear}</h3>
-                <div className="Calendar__event-title-underline"></div>
-                {
-                    //Simple check to see if there are any events for the month,
-                    //If there aren't any events for this month we display a "No events this month message"
-                    events.length === 0 && (
-                        <p>{selectedLanguage_OtherUIText[1]}</p>
-                    )
-                }
+                <div className="Calendar__event-list">
+                    <h3>{selectedLanguage_OtherUIText[0]} - {selectedLanguage_MonthsOfTheYear[currentMonth]} {currentYear}</h3>
+                    <div className="Calendar__event-title-underline"></div>
+                    {
+                        //Simple check to see if there are any events for the month,
+                        //If there aren't any events for this month we display a "No events this month message"
+                        events.length === 0 && (
+                            <p>{selectedLanguage_OtherUIText[1]}</p>
+                        )
+                    }
 
-                {
-                    //Using map to return a new array with our data transformed into event-items with the required values
-                    events.map(event => (
-                        <NavLink to={"/attending/" + event.id}>
-                            <div key={"EVI." + event.id} className='Calendar__event-item'>
-                                <strong>{event.title}</strong>
-                                <div>
-                                    {/* Here we show put the start and end datetime into our event item*/}
-                                    {DTToEVLStr(new Date(event.fromDateTime))} - {DTToEVLStr(new Date(event.untilDateTime))}
+                    {
+                        //Using map to return a new array with our data transformed into event-items with the required values
+                        events.map(event => (
+                            <NavLink to={"/attending/" + event.id}>
+                                <div key={"EVI." + event.id} className='Calendar__event-item'>
+                                    <strong>{event.title}</strong>
+                                    <div>
+                                        {/* Here we show put the start and end datetime into our event item*/}
+                                        {DTToEVLStr(new Date(event.fromDateTime))} - {DTToEVLStr(new Date(event.untilDateTime))}
+                                    </div>
                                 </div>
-                            </div>
-                        </NavLink>
-                    ))
-                }
+                            </NavLink>
+                        ))
+                    }
+                </div>
             </div>
-        </div>
+            <NavbarLoggedIn navbarItems={[
+                    { name: "Calendar", path: "/calendar" },
+                    { name: "Attending", path: "/attending" },
+                    { name: "Book a Room", path: "/book-a-room" }
+                ]} />
+            <LogoutBtn />
+        </>
     )
 }
 

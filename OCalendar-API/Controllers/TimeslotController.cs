@@ -53,7 +53,7 @@ public class TimeslotController : ControllerBase
     // ====================================================================================
     // POST
     // ====================================================================================
-    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageTimeslots })]
+    // [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageTimeslots })]
     [HttpPost("")]
     public ActionResult<Timeslot> Create([FromBody] TimeslotDto ts)
     {
@@ -63,7 +63,7 @@ public class TimeslotController : ControllerBase
     // ====================================================================================
     // PUT
     // ====================================================================================
-    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageTimeslots })]
+    // [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageTimeslots })]
     [HttpPut("{id:int}")]
     public ActionResult<Timeslot> Update(int id, [FromBody] TimeslotDto ts)
     {
@@ -74,7 +74,7 @@ public class TimeslotController : ControllerBase
     // ====================================================================================
     // DELETE
     // ====================================================================================
-    [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageTimeslots })]
+    // [TypeFilter(typeof(CanManageFilter), Arguments = new object[] { eManageOptions.ManageTimeslots })]
     [HttpDelete("{id:int}")]
     public ActionResult<Timeslot> Delete(int id) => _TimeslotService.Delete(id) ? Ok() : NotFound();
 }
